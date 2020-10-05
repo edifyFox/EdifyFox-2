@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>edifyfox</title>
+</head>
+<body>
+
+<div class="frame">
+    <div class="nameapp" id="nmapp">edifyfox</div>
+    <div class="sd" id="close"></div>
+    <div class="sddd" id="maxi"></div>
+    <div class="sdd" id="mini"></div>
+</div>
+
+<div class="loadingfake">
+    <div class="wrapload">
+        <img src="img/test.png" alt="edifyapp">
+    </div>
+</div>
+    
+<div id="bnzr" class="bnvz1">
+
+        <div id="strtitm1" class="artwrk_">
+        </div>
+        <div id="strtitm2" class="frmlgn_">
+            <div class="tit1">
+                <div class="st" id="stin">sign in</div>
+                <div class="st opac" id="stup">sign up</div>
+            </div>
+
+            <div class="singindiv" id="sgninitm" >
+                <form style="display: block;position: relative;">
+                    <div class="frm">
+                        <div class="lb">username</div>
+                        <input class="inptxt" type="text" name="nmusr" id="nmusr">
+                    </div>
+                    <div class="frm">
+                        <div class="lb">password</div>
+                        <input class="inptxt" type="password" name="pscod" id="pscod">
+                    </div>
+                    <div class="keepme">
+                        <input type="checkbox" id="chkedbox" class="chkedbox_">
+                        <label for="chkedbox" class="lb2">Keep me connected</label>
+                    </div>
+                    <div class="butsign" id="lssign" >Sign in</div>
+                </form>
+            </div>
+
+            <div class="signupdiv_" id="sgnupitm">
+                <form style="display: block;position: relative;">
+                    <div class="sgndiv">
+                        <div class="sgnsdiv">
+                            <label class="lb">first name</label>
+                            <input type="text" class="inptxt" id="frstnm" placeholder="Jack" tabindex="-1">
+                        </div>
+                        <div class="sgnsdiv">
+                                <label class="lb">last name</label>
+                                <input type="text "class="inptxt" id="scdnm" placeholder="Boualaqa" tabindex="-1">
+                        </div>
+                    </div>
+                   
+                    <div class="sgndiv" style="display: block;">
+                        <label class="lb">email</label>
+                        <input type="email" class="inptxt" id="mailchk" placeholder="test@test.test" tabindex="-1">
+                    </div>
+
+                    <div class="sgndiv">
+                        <div class="sgnsdiv">
+                            <label class="lb">password</label>
+                            <input type="password" class="inptxt" id="pwd" placeholder="minimum 8 character" tabindex="-1">
+                        </div>
+                        <div class="sgnsdiv">
+                            <label class="lb">Confirm password</label>
+                            <input type="password" class="inptxt" id="pwdc" placeholder="minimum 8 character" tabindex="-1">
+                        </div>
+                    </div>
+
+
+                    <label class="lb">Birthday</label>
+                    <div class="sgndiv" style="grid-template-columns: auto auto auto;">
+                        <div class="sgnsdiv">
+                                <select id="jour" class="birth" tabindex="-1">
+                                        <option value="none">Day</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                </select>
+                        </div>
+                        <div class="sgnsdiv">
+                                <select class="birth" id="mois" tabindex="-1">
+                                        <option value="none">Mounth</option>
+                                        <option value="January">January</option>
+                                        <option value="Febuary">Febuary</option>
+                                        <option value="March">March</option>
+                                        <option value="April">April</option>
+                                        <option value="May">May</option>
+                                        <option value="June">June</option>
+                                        <option value="July">July</option>
+                                        <option value="August">August</option>
+                                        <option value="September">September</option>
+                                        <option value="October">October</option>
+                                        <option value="November">November</option>
+                                        <option value="December">December</option>
+                                </select>
+                        </div>
+                        <div class="sgnsdiv">
+                                <select class="birth" id="annee" tabindex="-1">
+                                        <option value="none">Year</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="1999">1999</option>
+                                        <option value="1998">1998</option>
+                                        <option value="1997">1997</option>
+                                        <option value="1996">1996</option>
+                                        <option value="1995">1995</option>
+                                        <option value="1994">1994</option>
+                                        <option value="1993">1993</option>
+                                        <option value="1992">1992</option>
+                                        <option value="1991">1991</option>
+                                        <option value="1990">1990</option>
+                                        <option value="1989">1989</option>
+                                        <option value="1988">1988</option>
+                                        <option value="1987">1987</option>
+                                        <option value="1986">1986</option>
+                                        <option value="1985">1985</option>
+                                        <option value="1984">1984</option>
+                                        <option value="1983">1983</option>
+                                        <option value="1982">1982</option>
+                                        <option value="1981">1981</option>
+                                        <option value="1980">1980</option>
+                                    </select>
+                        </div>
+                    </div>
+
+                    <div class="sgndiv" style="grid-template-columns: none;grid-gap: 5px;">
+                        <label class="lb" style="margin-bottom: 10px;margin-top: 10px;">Country</label>
+                        <div class="sgnsdiv">
+                                <select class="birth" style="width: 100%;" id="cntry" tabindex="-1">
+                                        <option value="none">Choose</option>
+                                        <option value="algeria">Algeria</option>
+                                        <option value="angola">Angola</option>
+                                        <option value="benin">Benin</option>
+                                        <option value="botswana">Botswana</option>
+                                        <option value="burkina Faso">Burkina Faso</option>
+                                        <option value="burundi">Burundi</option>
+                                        <option value="cameroon">Cameroon</option>
+                                        <option value="cape-verde">Cape Verde</option>
+                                        <option value="central-african-republic">Central African Republic</option>
+                                        <option value="chad">Chad</option>
+                                        <option value="comoros">Comoros</option>
+                                        <option value="congo-brazzaville">Congo - Brazzaville</option>
+                                        <option value="congo-kinshasa">Congo - Kinshasa</option>
+                                        <option value="ivory-coast">Côte d’Ivoire</option>
+                                        <option value="djibouti">Djibouti</option>
+                                        <option value="egypt">Egypt</option>
+                                        <option value="equatorial-guinea">Equatorial Guinea</option>
+                                        <option value="eritrea">Eritrea</option>
+                                        <option value="ethiopia">Ethiopia</option>
+                                        <option value="gabon">Gabon</option>
+                                        <option value="gambia">Gambia</option>
+                                        <option value="ghana">Ghana</option>
+                                        <option value="guinea">Guinea</option>
+                                        <option value="guinea-bissau">Guinea-Bissau</option>
+                                        <option value="kenya">Kenya</option>
+                                        <option value="lesotho">Lesotho</option>
+                                        <option value="liberia">Liberia</option>
+                                        <option value="libya">Libya</option>
+                                        <option value="madagascar">Madagascar</option>
+                                        <option value="malawi">Malawi</option>
+                                        <option value="mali">Mali</option>
+                                        <option value="mauritania">Mauritania</option>
+                                        <option value="mauritius">Mauritius</option>
+                                        <option value="mayotte">Mayotte</option>
+                                        <option value="morocco">Morocco</option>
+                                        <option value="mozambique">Mozambique</option>
+                                        <option value="namibia">Namibia</option>
+                                        <option value="niger">Niger</option>
+                                        <option value="nigeria">Nigeria</option>
+                                        <option value="rwanda">Rwanda</option>
+                                        <option value="reunion">Réunion</option>
+                                        <option value="saint-helena">Saint Helena</option>
+                                        <option value="senegal">Senegal</option>
+                                        <option value="seychelles">Seychelles</option>
+                                        <option value="sierra-leone">Sierra Leone</option>
+                                        <option value="somalia">Somalia</option>
+                                        <option value="south-africa">South Africa</option>
+                                        <option value="sudan">Sudan</option>
+                                        <option value="south-sudan">Sudan</option>
+                                        <option value="swaziland">Swaziland</option>
+                                        <option value="Sao-tome-príncipe">São Tomé and Príncipe</option>
+                                        <option value="tanzania">Tanzania</option>
+                                        <option value="togo">Togo</option>
+                                        <option value="tunisia">Tunisia</option>
+                                        <option value="uganda">Uganda</option>
+                                        <option value="western-sahara">Western Sahara</option>
+                                        <option value="zambia">Zambia</option>
+                                        <option value="zimbabwe">Zimbabwe</option>
+                                </select>
+                        </div>
+                    </div>
+
+                    <div class="sgndiv" style="grid-template-columns: none;grid-gap: 5px;">
+                        <label class="lb" style="margin-bottom: 15px;margin-top: 10px;">gender</label>
+                        <div class="sgnsdiv">
+                            <input type="radio" name="sexe" id="male" tabindex="-1">
+                            <label class="lb" for="male" style="color: #ffffffc7;cursor: pointer;">Male</label>
+                        </div>
+                        <div class="sgnsdiv">
+                            <input type="radio" name="sexe" id="female" tabindex="-1">
+                            <label class="lb" for="female" style="color: #ffffffc7;cursor: pointer;">female</label>
+                        </div>
+                    </div>
+
+                    <div class="sgndiv" style="grid-template-columns: none;grid-gap: 5px;">
+                        <label class="lb" style="margin-bottom: 10px;margin-top: 10px;">School Level</label>
+                        <div class="sgnsdiv">
+                            <select class="birth" style="width: 100%;" id="mustawa" tabindex="-1">
+                                    <option value="none">Choose</option>
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option disabled value="3">3rd Year</option>
+                                    <option disabled value="4">4th Year</option>
+                                    <option disabled value="5">5th Year</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="sgndiv" id="brnc" style="display:none;grid-template-columns: none;grid-gap: 5px;">
+                            <label class="lb" style="margin-bottom: 10px;margin-top: 10px;">branch</label>
+                            <div class="sgnsdiv">
+                                <select class="birth" style="width: 100%;" id="branche" tabindex="-1">
+                                        <option value="none">Choose</option>
+                                        <option value="TC3A">TC3A</option>
+                                        <option value="GC">GC</option>
+                                        <option value="GIP">GIP</option>
+                                        <option value="GM">GM</option>
+                                        <option value="EMSI">EMSI</option>
+                                        <option value="GTIER">GTIER</option>
+                                        <option value="IPP">IPP</option>
+                                </select>
+                            </div>
+                    </div>
+
+                    <div class="sgndiv" style="grid-template-columns: none;grid-gap: 5px;">
+                            <label class="lb" style="margin-bottom: 10px;margin-top: 10px;">Section</label>
+                            <div class="sgnsdiv">
+                                <select class="birth" style="width: 100%;" id="sec" tabindex="-1">
+                                        <option value="none">Choose</option>
+                                        <option value="1" disabled class="for12">SEC 1</option>
+                                        <option value="2" disabled class="for12">SEC 2</option>
+                                        <option value="3" disabled class="for12345">SEC 3</option>
+                                        <option value="4" disabled class="for12345">SEC 4</option>
+                                        <option value="5" disabled class="for12345">SEC 5</option>
+                                </select>
+                            </div>
+                    </div>
+
+
+                    <label class="lb" style="margin-top: 10px;">Group & SG</label>
+                    <div class="sgndiv">
+                            <div class="sgnsdiv">
+                                <select class="birth" style="width: 100%;" id="grp" tabindex="-1">
+                                        <option value="none">Choose</option>
+                                        <option value="11" disabled class="forsec1">G11</option>
+                                        <option value="12" disabled class="forsec1">G12</option>
+                                        <option value="13" disabled class="forsec1">G13</option>
+                                        <option value="14" disabled class="forsec1">G14</option>
+                                        <option value="15" disabled class="forsec1">G15</option>
+
+                                        <option value="21" disabled class="forsec2">G21</option>
+                                        <option value="22" disabled class="forsec2">G22</option>
+                                        <option value="23" disabled class="forsec2">G23</option>
+                                        <option value="24" disabled class="forsec2">G24</option>
+                                        <option value="25" disabled class="forsec2">G25</option>
+
+                                        <option value="1" disabled class="forsec3">G1</option>
+                                        <option value="2" disabled class="forsec3">G2</option>
+                                        <option value="3" disabled class="forsec3">G3</option>
+                                        <option value="4" disabled class="forsec3">G4</option>
+                                        <option value="5" disabled class="forsec3">G5</option>
+                                </select>
+                            </div>
+                            <div class="sgnsdiv" >
+                                    <select class="birth" style="width: 100%;" id="sgrp" tabindex="-1">
+                                            <option value="none">Choose</option>
+                                            <option value="1">SG-1</option>
+                                            <option value="2">SG-2</option>
+                                            <option disabled value="sg3">SG 3</option>
+                                    </select>
+                            </div>
+                    </div>
+
+
+                    <div class="sgndiv">
+                            <div class="butsign" id="lssignup" style="margin-top: 20px;">Sign up</div>
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+
+</div>
+
+<div class="mrbnvz2">
+    <div id="itm1" class="animone_"></div>
+    <div id="itm2" class="animtwo_"></div>
+    <div id="itm3" class="sdmn_">
+        <div class="sdvan oncsd" id="hme"> <img src="icons/home.png"> </div>
+        <div class="sdvan" id="prf"> <img src="icons/prf.png"> </div>
+        <div class="sdvan" id="nws"> <span id="spinoza" style="opacity: 0;"></span> <img src="icons/notif.jpg"> </div>
+        <div class="sdvan" id="crs"> <img src="icons/book.png"> </div>
+        <div class="sdvan" id="tls"> <img src="icons/brush.png"> </div>
+        <div class="sdvan" id="lgout"> <img src="icons/logout.png"> </div>
+    </div>
+    <div id="ntfbar" class="notif_">
+        <h1 id="h1trns" class="h1">notifications</h1>
+        <div id="ntfwrapthings"></div>
+        <div id="ajtcbzf" class="bgtncbzf">Load more</div>
+    </div>
+    <div class="wrapper">
+        <div class="prfdv">
+            <div class="sdmn2">
+                <div id="hmes1" class="smn2it">
+                    <div class="smdl3iba">home</div>
+                    <div id="hms1" class="dvl3iba opa1"></div>
+                </div>
+                <div id="hmes2" class="smn2it">
+                    <div class="smdl3iba">to do list</div>
+                    <div id="hms2" class="dvl3iba"></div>
+                </div>
+                <div id="hmes3" class="smn2it">
+                    <div class="smdl3iba">schedule</div>
+                    <div id="hms3" class="dvl3iba"></div>
+                </div>
+                <div id="hmes4" class="smn2it">
+                    <div class="smdl3iba">weather</div>
+                    <div id="hms4" class="dvl3iba"></div> 
+                </div>
+            </div>
+            <div id="anm1" class="anim">
+                <div class="vid">
+                    <video autoplay loop src="vids/nn.mp4"></video>
+                </div>
+                <div class="bcscrn"></div>
+                <div class="txndor">
+                    <p>Welcome to your home</p>
+                    <p>it's nice to meet you</p>
+                </div>
+            </div>
+            <div id="amm2" class="animtdl">
+
+                <h1 class="title">
+                    start palnning today
+                    <b>plan your day to get more done ,Don't waste time thinking about what you should to do</b>
+                </h1>
+                <div class="wraptdl">
+                <div class="all-tasks">
+                  <h2 class="task-list-title">My lists</h2>
+                  <ul class="task-list" data-lists></ul>
+            
+                  <form action="" data-new-list-form>
+                    <input 
+                      type="text"
+                      class="new list"
+                      data-new-list-input
+                      placeholder="new list name"
+                      aria-label="new list name"
+                    />
+                    <button class="btn create" aria-label="create new list">+</button>
+                  </form>
+                </div>
+            
+                <div class="todo-list" data-list-display-container>
+                  <div class="todo-header">
+                    <h2 class="list-title" data-list-title></h2>
+                    <p class="task-count" data-list-count></p>
+                  </div>
+            
+                  <div class="todo-body">
+                    <div class="tasks" data-tasks></div>
+            
+                    <div class="new-task-creator">
+                        <form action="" data-new-task-form>
+                            <input 
+                              type="text"
+                              data-new-task-input
+                              class="new task"
+                              placeholder="new task name"
+                              aria-label="new task name"
+                            />
+                            <button class="btn create" aria-label="create new task">+</button>
+                          </form>
+                    </div>
+            
+                    <div class="delete-stuff">
+                      <button class="btn delete" data-clear-complete-tasks-button>Clear completed tasks</button>
+                      <button class="btn delete" data-delete-list-button>Delete list</button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            
+               
+                <template id="task-template">
+                  <div class="task">
+                    <input type="checkbox" />
+                    <label>
+                      <span class="custom-checkbox"></span>
+                    </label>
+                  </div>
+                </template>
+
+
+            </div>
+            <div id="amm3" class="animscd">
+                <div class="scdltit">
+                    <div class="scdcrtweek"> <i class="material-icons">keyboard_arrow_left</i> </div>
+                    <span>week <b id="weekNB">--</b></span>
+                    <div class="scdnxtweek"> <i class="material-icons">navigate_next</i> </div>
+                </div>
+                <div class="scdlop">
+                    <div class="scdldays">
+                        <div class="scdtm">Monday</div>
+                        <div class="scdtm">tuesday</div>
+                        <div class="scdtm">wednesday</div>
+                        <div class="scdtm">thursday</div>
+                        <div class="scdtm">friday</div>
+                    </div>
+                    <div class="scdlwrap">
+                        <div class="scdltime">
+                            <div class="scdtm">08:30</div>
+                            <div class="scdtm">09:30</div>
+                            <div class="scdtm">10:30</div>
+                            <div class="scdtm">11:30</div>
+                            <div class="scdtm">12:30</div>
+                            <div class="scdtm">13:30</div>
+                            <div class="scdtm">14:30</div>
+                            <div class="scdtm">15:30</div>
+                            <div class="scdtm">16:30</div>
+                            <div class="scdtm">17:30</div>
+                            <div class="scdtm">18:30</div>
+                            <div class="scdtm">19:30</div>
+                        </div>
+                        <div class="scdlcontent">
+                            <div class="scdLundi"></div>
+                            <div class="scdMardi"></div>
+                            <div class="scdMercredi"></div>
+                            <div class="scdJeudi"></div>
+                            <div class="scdVendredi"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="amm1" class="animwth">
+                <div class="bcgradwth"></div>
+                <div class="data1wth">
+                        <img src="">
+                        <div class="dtwthstat">-</div>
+                        <div class="dtwthmdina">-</div>
+                        <div class="dtwthtemp">-°C</div>
+                </div>
+                <div class="data2wth">
+                    <div class="dtwthmore">
+                        <img src="icons/wth/humidity.png" alt="humidity">
+                        <div class="dtwthdivat">
+                            <label>humidity</label>
+                            <div id="dtwthvar1" class="dtwthvar">-</div>
+                        </div>
+                    </div>
+                    <div class="dtwthmore">
+                        <img src="icons/wth/pressure.png" alt="pressure">
+                        <div class="dtwthdivat">
+                            <label>pressure</label>
+                            <div id="dtwthvar2" class="dtwthvar">-</div>
+                        </div>
+                    </div>
+                    <div class="dtwthmore">
+                        <img src="icons/wth/wind.png" alt="wind">
+                        <div class="dtwthdivat">
+                            <label>wind</label>
+                            <div id="dtwthvar3" class="dtwthvar">-</div>
+                        </div>
+                    </div>
+                    <div class="dtwthmore">
+                        <img src="icons/wth/sunrise.png" alt="sunrise">
+                        <div class="dtwthdivat">
+                            <label>sunrise</label>
+                            <div id="dtwthvar4" class="dtwthvar">-</div>
+                        </div>
+                    </div>
+                    <div class="dtwthmore">
+                        <img src="icons/wth/sunset.png" alt="sunset">
+                        <div class="dtwthdivat">
+                            <label>sunset</label>
+                            <div id="dtwthvar5" class="dtwthvar">-</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data3wth"></div>
+            </div>
+        </div>
+        <div class="firscard_" id="anm2">
+            <div class="mainone">
+                <div class="submainone">
+                    <div class="sbmnimg">
+                        <img id="prfcrdimg" src="" alt="profilePic">
+                        <label id="prcentLabel" class="fileLabel" for="file1">Edit</label>
+                        <input id="file1" name="file1" class="inputfile" type="file">
+                    </div>
+                    <div id="prfcrdstt" class="submnstatus1"></div>
+                    <div class="submnstatus2">
+                        <div class="subsubstat">
+                            <div id="prfcrdgnd" class="submnval"></div>
+                            <div class="submnlbl">gender</div>
+                        </div>
+                        <div class="subsubstat">
+                            <div id="prfcrdage" class="submnval"></div>
+                            <div class="submnlbl">age</div>
+                        </div>
+                    </div>
+                    <div class="submnstatus3">
+                        <div class="subsubstat_">
+                            <div class="submnlbll">Birthday</div>
+                            <div id="prfcrdddn" class="submnvall"></div>
+                        </div>
+                        <div class="subsubstat_">
+                            <div class="submnlbll">section</div>
+                            <div id="prfcrdsec" class="submnvall"></div>
+                        </div>
+                        <div class="subsubstat_">
+                            <div class="submnlbll">Groupe</div>
+                            <div id="prfcrdgrp" class="submnvall"></div>
+                        </div>
+                        <div class="subsubstat_">
+                            <div class="submnlbll">Sous Groupe</div>
+                            <div id="prfcrdsgp" class="submnvall"></div>
+                        </div>
+                        <div class="subsubstat_">
+                            <div class="submnlbll">Member since</div>
+                            <div id="prfcrdddc" class="submnvall"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="maintwo">
+                <div id="prfcrdnam" class="submntwo"></div>
+                <div class="submntwo_">
+                    <div class="sbsbmn">
+                        <div class="sbsbtit">logins</div>
+                        <div id="prfcrdema" class="sbsbmail"></div>
+                        <div class="sbsbpass">
+                            <div id="prfcrdpwd" class="passcd"></div>
+                        </div>
+                        <div id="editthings1" class="inputat">
+                            <input type="password" class="inptxt" id="pwded1" placeholder="Old password">
+                            <input type="password" class="inptxt" id="pwded2" placeholder="New PassWord minimum 8 character">
+                        </div>
+                        <div id="editthings2" class="inputatmn">
+                                <div class="sgnsdiv">
+                                    <select class="birth" style="width: 100%;" id="mustawa_" tabindex="-1">
+                                        <option value="none">School Level</option>
+                                        <option value="1">1st Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option disabled value="3">3rd Year</option>
+                                        <option disabled value="4">4th Year</option>
+                                        <option disabled value="5">5th Year</option>
+                                    </select>
+                                </div>
+                                <div class="sgnsdiv">
+                                    <select class="birth" style="width: 100%;" id="sec_" tabindex="-1">
+                                            <option value="none">Section</option>
+                                            <option value="1" disabled class="fo12">SEC 1</option>
+                                            <option value="2" disabled class="fo12">SEC 2</option>
+                                            <option value="3" disabled class="fo12345">SEC 3</option>
+                                            <option value="4" disabled class="fo12345">SEC 4</option>
+                                            <option value="5" disabled class="fo12345">SEC 5</option>
+                                    </select>
+                                </div>
+                                <div class="sgnsdiv">
+                                    <select class="birth" style="width: 100%;" id="grp_" tabindex="-1">
+                                            <option value="none">Groupe</option>
+                                            <option value="11" disabled class="fosec1">G11</option>
+                                            <option value="12" disabled class="fosec1">G12</option>
+                                            <option value="13" disabled class="fosec1">G13</option>
+                                            <option value="14" disabled class="fosec1">G14</option>
+                                            <option value="15" disabled class="fosec1">G15</option>
+    
+                                            <option value="21" disabled class="fosec2">G21</option>
+                                            <option value="22" disabled class="fosec2">G22</option>
+                                            <option value="23" disabled class="fosec2">G23</option>
+                                            <option value="24" disabled class="fosec2">G24</option>
+                                            <option value="25" disabled class="fosec2">G25</option>
+    
+                                            <option value="1" disabled class="fosec3">G1</option>
+                                            <option value="2" disabled class="fosec3">G2</option>
+                                            <option value="3" disabled class="fosec3">G3</option>
+                                            <option value="4" disabled class="fosec3">G4</option>
+                                            <option value="5" disabled class="fosec3">G5</option>
+                                    </select>
+                                </div>
+                                <div class="sgnsdiv" >
+                                        <select class="birth" style="width: 100%;" id="sgrp_" tabindex="-1">
+                                                <option value="none">S-groupe</option>
+                                                <option value="1">SG-1</option>
+                                                <option value="2">SG-2</option>
+                                                <option disabled value="sg3">SG 3</option>
+                                        </select>
+                                </div>
+                        </div>
+                    </div>
+                    <div id="editPrflp" class="buteditt">Edit your stats</div>
+                    <div id="deletAcc" class="butedittt">Delete Account</div>
+                </div>
+            </div>
+        </div>
+        <div class="tools_" id="anm3">
+            <div class="mantit">our Tools</div>
+            <div id="scndphp" class="manstit">use these tools to improve yourself</div>
+            <div id="tirdphp" class="toolswrap"></div>
+        </div>
+        <div class="courses_" id="crskhdmi">
+            <div class="mantit">My courses</div>
+            <div id="scndphp" class="manstit">here's what you'll need in this year</div>
+            <div id="frstphp" class="modulwrap"></div>
+        </div>
+        <div class="elyout_" id="lyoutkhdmi">
+        </div>
+        <div class="ifram_" id="viewifram">
+            <div class="top-bar">
+                <button class="btnn" id="prev-page" onclick="showPrevPage()">
+                    <i class="material-icons">keyboard_arrow_up</i>
+                </button>
+                <span class="page-info">
+                    <span id="page-num"></span> / <span id="page-count"></span>
+                 </span>
+                 <button class="btnn" id="next-page" onclick="showNextPage()">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </button>
+                <button class="btnn" id="rot-page" data-settop>
+                    <i class="material-icons">rotate_90_degrees_ccw</i>
+                </button>
+              </div>
+              <progress value="0" max="100" id="progressBar" class="outputProgress"></progress>
+              <div class="canvascontainer">
+                  <canvas id="pdf-render" class="xrt0"></canvas>
+              </div>
+        </div>
+    </div>
+</div>
+
+<div id="offmodeui" class="offui3">
+    <div id="cndoff1" class="condoff">
+        <h1>offline mode</h1>
+        <div class="wrapperOff">
+            <img src="img/offmode.png" alt="offmode">
+            <p>Hmm, it looks like you haven't downloaded anything.</p>
+        </div>
+    </div>
+    <div id="cndoff2" class="condoff">
+        <h1>offline mode</h1>
+        <div id="offmodewrap" class="wrapdl3ibat"></div>
+    </div>
+
+    <div class="ifram2_" id="viewifram2">
+        <div class="top-bar">
+            <button class="btnn" id="prev-page2" onclick="showPrevPage2()">
+                <i class="material-icons">keyboard_arrow_up</i>
+            </button>
+            <span class="page-info">
+                <span id="page-num2"></span> / <span id="page-count2"></span>
+             </span>
+             <button class="btnn" id="next-page2" onclick="showNextPage2()">
+                <i class="material-icons">keyboard_arrow_down</i>
+            </button>
+            <button class="btnn" id="rot-page2">
+                <i class="material-icons">rotate_90_degrees_ccw</i>
+            </button>
+            <button class="btnn" id="cls-page">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <div class="canvascontainer2">
+            <canvas id="pdf-render2" class="xrt0"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<div class="dialogwrap" style="display: none;">
+    <div class="bcblak"></div>
+    <img id="loadwin" class="lding_" src="icons/preloader.gif" alt="LOADING">
+    <div id="alertada" class="alertthing">
+        <h1>Edify</h1>
+        <label></label>
+        <span>ok</span>
+    </div>
+    <div id="hanadl" class="dialogwin"></div>
+</div>
+
+
+<script defer src="js/script.js"></script>
+<script defer src="js/lb/pdf.js"></script>
+<script defer src="js/todolist.js"></script>
+
+</body>
+</html>

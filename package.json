@@ -1,0 +1,77 @@
+{
+  "name": "edifyfox",
+  "productName": "edifyfox-app",
+  "version": "2.0.0",
+  "description": "Version two of the edifyfox app for ENSAM students",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edifyFox/EdifyFox-App.git"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "edifyFox",
+    "email": "edifyprod@gmail.com"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "osxSign": {
+          "identity": "Developer ID Application: Felix Rieseberg (LT94ZKYDCJ)",
+          "hardened-runtime": true,
+          "entitlements": "entitlements.plist",
+          "entitlements-inherit": "entitlements.plist",
+          "signature-flags": "library"
+        },
+        "osxNotarize": {
+          "appleId": "my apple id email",
+          "appleIdPassword": "my-apple-id-password"
+        }
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "edifyfox"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "jquery": "^3.5.1",
+    "localforage": "^1.9.0",
+    "update-electron-app": "^2.0.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.53",
+    "@electron-forge/maker-deb": "^6.0.0-beta.53",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.53",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.53",
+    "@electron-forge/maker-zip": "^6.0.0-beta.53",
+    "electron": "10.1.3"
+  }
+}
