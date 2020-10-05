@@ -5,7 +5,7 @@
   "description": "Version two of the edifyfox app for ENSAM students",
   "repository": {
     "type": "git",
-    "url": "https://github.com/edifyFox/EdifyFox-App.git"
+    "url": "https://github.com/edifyFox/EdifyFox-2.git"
   },
   "main": "src/index.js",
   "scripts": {

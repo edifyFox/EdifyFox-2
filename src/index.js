@@ -5,11 +5,7 @@ const path = require('path');
 
 // UPDATE
 
-require('update-electron-app')({
-  repo: 'github-user/repo',
-  updateInterval: '1 hour',
-  logger: require('electron-log')
-});
+require('update-electron-app')();
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
