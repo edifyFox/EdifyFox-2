@@ -2,6 +2,12 @@ const { remote } = require('electron');
 const $ = require('jquery');
 const fs = require('fs');
 const localforage = require('localforage');
+const { ipcRenderer } = require('electron');
+
+ipcRenderer.on('messageUPDATE', (event,text) => {
+    console.log(`Message from updater : ${text}`);
+});
+
 
 var win = remote.getCurrentWindow();
 
