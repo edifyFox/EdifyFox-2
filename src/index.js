@@ -1,11 +1,11 @@
+require('update-electron-app')({
+  repo: 'edifyFox/EdifyFox-2'
+})
+
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
-
-// UPDATE
-
-require('update-electron-app')();
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
