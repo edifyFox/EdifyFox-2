@@ -60,7 +60,8 @@ body {
     top: 0;
     width: 100vw;
     height: 30px;
-    background: rgba(180, 180, 180, 0.04);
+    /*background: rgba(180, 180, 180, 0.04);*/
+    background: red;
     -webkit-user-select: none;
     -webkit-app-region: drag;
 }
