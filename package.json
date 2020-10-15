@@ -21,6 +21,15 @@
       ],
       "icon": "src/assets/app-icon/win/app.ico"
     },
+    "mac": {
+      "category": "public.app-category.education",
+      "target": [
+        "dmg"
+      ],
+      "icon": "src/assets/app-icon/mac/app.icns",
+      "entitlements": "./src/assets/mac/info.plist",
+      "entitlements-inherit": "./src/assets/mac/info.plist"
+    },
     "nsis": {
       "installerIcon": "src/assets/app-icon/win/app.ico",
       "uninstallerIcon": "src/assets/app-icon/win/app.ico",
@@ -28,6 +37,10 @@
       "license": "LICENCE.txt",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
+    },
+    "dmg": {
+      "icon": "src/assets/app-icon/mac/app.icns",
+      "iconSize": 80
     }
   },
   "keywords": [],
