@@ -7,8 +7,7 @@ function renderPDF(pdfSource) {
  	   path: '../public/lib',
  	   initialDoc: pdfSource,
  	}, viewerElement).then(instance => {
-	   // Interact with APIs here.
-	   // See https://www.pdftron.com/documentation/web/guides/basic-functionality for more info/
+	   instance.disableElements([ 'downloadButton', 'printButton' ]);
 	})
 }
 
