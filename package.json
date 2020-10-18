@@ -89,6 +89,7 @@
     }
   },
   "dependencies": {
+    "@pdftron/webviewer": "^7.1.2",
     "electron-log": "^4.2.4",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.3.5",

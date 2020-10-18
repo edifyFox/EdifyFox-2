@@ -1,29 +1,15 @@
-const { remote } = require('electron');
 const $ = require('jquery');
 const fs = require('fs');
 const localforage = require('localforage');
 const { ipcRenderer } = require('electron');
+const { BrowserWindow } = require('electron').remote;
+const url = require('url');
+const path = require('path');
 
 ipcRenderer.on('messageUPDATE', (event,text) => {
     console.log(`Message from updater : ${text}`);
 });
 
-
-var win = remote.getCurrentWindow();
-
-var OSName="Unknown OS";
-if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
-if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
-if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
-if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
-
-
-if(OSName=="MacOS"){
-    document.getElementById('nmapp').className = 'nameappmac';
-    document.getElementById('close').className = 'sdmac';
-    document.getElementById('maxi').className = 'sdddmac';
-    document.getElementById('mini').className = 'sddmac';
-}
 
 var alertadaT = false;
 
@@ -44,21 +30,7 @@ var scale = 5,
 
 
 
-$('#mini').click(function(){
-  win.minimize();
-});
 
-$('#close').click(function(){
-  win.close();
-});
-
-$('#maxi').click(function() {
-  if(win.isMaximized()){
-      win.unmaximize();
-  }else{
-      win.maximize();
-  }
-});
 
 if (typeof document.onselectstart != "undefined") {
     document.onselectstart = new Function ("return false");
@@ -66,6 +38,24 @@ if (typeof document.onselectstart != "undefined") {
     document.onmouseup = new Function ("return true");
     document.onmousedown = new Function ("return false");
 }
+
+
+
+
+var ajourdhui = new Date().getTime() / 1000;
+var crntdbssh;
+var crntweek;
+
+
+var today = new Date();
+if(today.getDay() == 6 || today.getDay() == 0) { 
+    crntweek = ajourdhui + 172800;
+    crntdbssh = ajourdhui + 172800;
+} else {
+    crntweek = ajourdhui;
+    crntdbssh = ajourdhui;
+}
+
 
 var SESSION = {
     id : '',
@@ -84,20 +74,6 @@ var SESSION = {
     ip : '',
 }
 
-
-var ajourdhui = new Date().getTime() / 1000;
-var crntdbssh;
-var crntweek;
-
-
-var today = new Date();
-if(today.getDay() == 6 || today.getDay() == 0) { 
-    crntweek = ajourdhui + 172800;
-    crntdbssh = ajourdhui + 172800;
-} else {
-    crntweek = ajourdhui;
-    crntdbssh = ajourdhui;
-}
 
 
 function prf3mer() {
@@ -133,76 +109,78 @@ function prf3mer() {
 
 }
 
+
+
 function chker() {
 
-if(navigator.onLine) {
-    const customer = JSON.parse(localStorage.getItem('chkedlgn'));
-    if (!customer) {
-            setTimeout(function() { 
-                document.getElementById('bnzr').className = 'bnvz1_';
-            }, 1500);
-    } else {
-        $.ajax({
-            url: 'https://edifyfox.com/php/chkedlogin.php',
-            method: 'POST',
-            data: {
-                login: customer.username,
-                pwd: customer.password
-            },
-            dataType: 'json',
-            success: function(data){
-                if (data.id == "nan") {
-                    setTimeout(function() { 
-                        document.getElementById('bnzr').className = 'bnvz1_';
-                    }, 1500);
-                } else {
-                    SESSION.id = data.id;
-                    SESSION.firstname = data.firstname;
-                    SESSION.lastname = data.lastname;
-                    SESSION.email = data.email;
-                    SESSION.pwd = data.pwd;
-                    SESSION.ddn = data.ddn;
-                    SESSION.country = data.country;
-                    SESSION.gender = data.gender;
-                    SESSION.sclevel = data.sclevel;
-                    SESSION.sec = data.sec;
-                    SESSION.grp = data.grp;
-                    SESSION.sgrp = data.sgrp;
-                    SESSION.ddc = data.ddc;
-                    SESSION.ip = data.ip;
+    if(navigator.onLine) {
+        const customer = JSON.parse(localStorage.getItem('chkedlgn'));
+        if (!customer) {
+                setTimeout(function() { 
+                    document.getElementById('bnzr').className = 'bnvz1_';
+                }, 1500);
+        } else {
+            $.ajax({
+                url: 'https://edifyfox.com/php/chkedlogin.php',
+                method: 'POST',
+                data: {
+                    login: customer.username,
+                    pwd: customer.password
+                },
+                dataType: 'json',
+                success: function(data){
+                    if (data.id == "nan") {
+                        setTimeout(function() { 
+                            document.getElementById('bnzr').className = 'bnvz1_';
+                        }, 1500);
+                    } else {
+                        SESSION.id = data.id;
+                        SESSION.firstname = data.firstname;
+                        SESSION.lastname = data.lastname;
+                        SESSION.email = data.email;
+                        SESSION.pwd = data.pwd;
+                        SESSION.ddn = data.ddn;
+                        SESSION.country = data.country;
+                        SESSION.gender = data.gender;
+                        SESSION.sclevel = data.sclevel;
+                        SESSION.sec = data.sec;
+                        SESSION.grp = data.grp;
+                        SESSION.sgrp = data.sgrp;
+                        SESSION.ddc = data.ddc;
+                        SESSION.ip = data.ip;
 
-                    mdularaya(SESSION.sclevel);
-                    getScdlAndWeekNum(crntweek);
-                    prf3mer();
-                    loadnotif();
-                    toolaraya();
-                    setInterval(function() {
+                        mdularaya(SESSION.sclevel);
+                        getScdlAndWeekNum(crntweek);
+                        prf3mer();
                         loadnotif();
-                    }, 5000);
+                        toolaraya();
+                        setInterval(function() {
+                            loadnotif();
+                        }, 5000);
 
 
 
-                    $('.bcblak').click();
-                    $('.mrbnvz2').css('display', 'block');
-                    setTimeout(function() { 
-                        document.getElementById('itm1').className = 'animone';
-                    }, 1500);
-                    setTimeout(function() { 
-                        document.getElementById('itm2').className = 'animtwo';
-                    }, 1900);
-                    setTimeout(function() { 
-                        document.getElementById('itm3').className = 'sdmn';
-                        $('.wrapper').css('opacity', '1');
-                    }, 2400);
+                        $('.bcblak').click();
+                        $('.mrbnvz2').css('display', 'block');
+                        setTimeout(function() { 
+                            document.getElementById('itm1').className = 'animone';
+                        }, 1500);
+                        setTimeout(function() { 
+                            document.getElementById('itm2').className = 'animtwo';
+                        }, 1900);
+                        setTimeout(function() { 
+                            document.getElementById('itm3').className = 'sdmn';
+                            $('.wrapper').css('opacity', '1');
+                        }, 2400);
+                    }
                 }
-            }
-        });
-        
-    }
+            });
+            
+        }
 
-} else {
-    alertada('You are Offline')
-}
+    } else {
+        alertada('You are Offline')
+    }
 
 }
 chker();
@@ -478,20 +456,20 @@ $('.wrapper').click(function() {
 $('#lgout').click(function() {
 
 
-                            SESSION.id = '';
-                            SESSION.firstname = '';
-                            SESSION.lastname = '';
-                            SESSION.email = '';
-                            SESSION.ddn = '';
-                            SESSION.country = '';
-                            SESSION.gender = '';
-                            SESSION.sclevel = '';
-                            SESSION.sec = '';
-                            SESSION.grp = '';
-                            SESSION.sgrp = '';
-                            SESSION.ddc = '';
-                            SESSION.ip = '';
-                            crntweek = crntdbssh;
+    SESSION.id = '';
+    SESSION.firstname = '';
+    SESSION.lastname = '';
+    SESSION.email = '';
+    SESSION.ddn = '';
+    SESSION.country = '';
+    SESSION.gender = '';
+    SESSION.sclevel = '';
+    SESSION.sec = '';
+    SESSION.grp = '';
+    SESSION.sgrp = '';
+    SESSION.ddc = '';
+    SESSION.ip = '';
+    crntweek = crntdbssh;
 
     document.getElementById('bnzr').className = 'bnvz1_';
     localStorage.removeItem('chkedlgn');
@@ -1248,39 +1226,38 @@ function pdfviewerfunction(arg) {
 
 
   
-function showviewer(source, strarg, idarg, tparg) {
-    document.getElementById('viewifram').className = 'ifram';
-    var Namestr = `file[${strarg}]edify-${idarg}-${tparg}`;
-    localforage.getItem(Namestr).then(function(value) {
-        if (value) {
-            pdfviewerfunction(value);
-        } else {
-            var xhr = new XMLHttpRequest(),
-            blob,
-            fileReader = new FileReader();
-            xhr.open("GET", source, true);
-            xhr.responseType = "arraybuffer";
-            xhr.addEventListener("progress", function(event) {
-                var percent = (event.loaded / event.total) * 100;
-                document.getElementById("progressBar").value = Math.round(percent);
-            }, false);
-            xhr.addEventListener("load", function () {
-                if (xhr.status === 200) {
-                    blob = new Blob([xhr.response], {type: "application/pdf"});
-                    fileReader.onload = function (evt) {
-                        var result = evt.target.result;
-                        pdfviewerfunction(result);
-                        document.getElementById("progressBar").value = 0;
-                    };
-                    fileReader.readAsDataURL(blob);
-                }
-            }, false);
-            xhr.send();
+function showviewer(source, strEL, strFL, strTYPE) {
+
+    const childWin = new BrowserWindow({ 
+        width: 1000,
+        height: 600,
+        minHeight: 400,
+        minWidth : 400,
+        title: `${strEL} - ${strFL} - ${strTYPE}`,
+        backgroundColor: '#eee',
+        icon: __dirname+'/assets/app-icon/win/app.png',
+        frame: true,
+        show: false,
+        webPreferences: {
+          nodeIntegration: true,
+          enableRemoteModule: true
         }
-    }).catch(function(err) {
-        // This code runs if there were any errors
-        console.log(err);
     });
+    childWin.setParentWindow(require('electron').remote.getCurrentWindow())
+    childWin.loadURL(
+        url.format({
+          pathname: path.join(__dirname, 'js/webViewer/public/index.html'),
+          protocol: 'file:',
+          slashes: true
+        })
+    );
+    childWin.once("show", () => {
+        childWin.webContents.send("pdfSrc",source);
+        childWin.webContents.send("title",`${strEL} - ${strFL} - ${strTYPE}`);
+    });
+    childWin.once("ready-to-show", () => {
+        childWin.show();
+    })
     
 }
 

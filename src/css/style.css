@@ -60,8 +60,7 @@ body {
     top: 0;
     width: 100vw;
     height: 30px;
-    /*background: rgba(180, 180, 180, 0.04);*/
-    background: red;
+    background: rgba(180, 180, 180, 0.04);
     -webkit-user-select: none;
     -webkit-app-region: drag;
 }
@@ -77,6 +76,28 @@ body {
     letter-spacing: 1px;
     font-weight: 600;
     color: #ffffff7a;
+}
+
+.descfn {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 15px;
+    height: 30px;
+    line-height: 30px;
+    font-family: 'Raleway';
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 9px;
+    color: #ffffff78;
+}
+.descNLb {
+    font-weight: 400;
+    color: aliceblue;
 }
 
 .nameappmac {
@@ -239,7 +260,7 @@ a:visited {
 
 .loadingfake {
     position: fixed;
-    z-index: 1;
+    z-index: 0;
     width: 100vw;
     height: calc(100vh - 30px);
     background: #1c2329;
@@ -303,7 +324,7 @@ a:visited {
 
 .artwrk_ {
     display: block;
-    background: url(../img/artwork.jpg) no-repeat center center;
+    background: url(../img/artwork.jpg) no-repeat top center;
     background-size: cover;
     position: relative;
 }
