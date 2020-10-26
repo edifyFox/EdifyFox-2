@@ -1,6 +1,4 @@
 const $ = require('jquery');
-const fs = require('fs');
-const localforage = require('localforage');
 const { ipcRenderer } = require('electron');
 const { BrowserWindow } = require('electron').remote;
 const url = require('url');
@@ -8,19 +6,9 @@ const path = require('path');
 const User = require(path.join(__dirname, 'js/logger.js'));
 
 
-
 ipcRenderer.on('messageUPDATE', (event,text) => {
     console.log(`Message from updater : ${text}`);
 });
-
-
-
-
-setInterval(function(){
-    if(!navigator.onLine && $('#offmodeui').css('opacity') == 0) {alertada('You are Offline')}
-    if(!navigator.onLine && $('#offmodeui').css('opacity') == 1) {}
-}, 1000);
-
 
 
 if (typeof document.onselectstart != "undefined") {
@@ -30,14 +18,10 @@ if (typeof document.onselectstart != "undefined") {
     document.onmousedown = new Function ("return false");
 }
 
-
-
-
+//SETUP DATE
 var ajourdhui = new Date().getTime() / 1000;
 var crntdbssh;
 var crntweek;
-
-
 var today = new Date();
 if(today.getDay() == 6 || today.getDay() == 0) { 
     crntweek = ajourdhui + 172800;
@@ -76,30 +60,33 @@ $('.bcblak').click(function() {
         $('.dialogwrap').css('display', 'none');
         document.getElementById('hanadl').innerHTML = '';
     }, 300);
-    if (navigator.onLine) {} else {
-        jiblidikchi();
-        document.getElementById('offmodeui').className = "offui3_";
-    }
+});
+$('#alertada span').click(function() {
+    $('.bcblak').click();
 });
 
+//OFFLINE ALLERT
+setInterval(function(){
+    if(!navigator.onLine && $('#offmodeui').css('opacity') == 0) {alertada('You are Offline')}
+    if(!navigator.onLine && $('#offmodeui').css('opacity') == 1) {}
+}, 1000);
 
 
 // INITIATE USER
-
 var user = new User();
 
 function loginSuccess() {
     if(user.session){
-        mdularaya(user.sclevel);
-        getScdlAndWeekNum(crntweek);
+        mdularaya();
+        // getScdlAndWeekNum(crntweek);
         prf3mer();
         loadnotif();
         setInterval(function() {
             loadnotif();
         }, 5000);
-        $('.bcblak').click();
         $('.mrbnvz2').css('display', 'block');
         setTimeout(function() { 
+            $('.bcblak').click();
             document.getElementById('itm1').className = 'animone';
         }, 1500);
         setTimeout(function() { 
@@ -112,19 +99,21 @@ function loginSuccess() {
         document.getElementById('nmusr').value = "";
         document.getElementById('pscod').value = "";
         document.getElementById('chkedbox').checked = false;
+        console.log('Welcome');
     }
 }
 
 function prf3mer() {
     if (user.session) {
+        document.getElementById("prfcrdstt").innerHTML = user.getLevel();
         document.getElementById("prfcrdgnd").innerHTML = user.gender;
         document.getElementById("prfcrdage").innerHTML = user.getAge();
         document.getElementById("prfcrdddn").innerHTML = user.getBirthday();
         document.getElementById("prfcrdsec").innerHTML = "sec-" + user.sec;
         document.getElementById("prfcrdgrp").innerHTML = "G-" + user.grp;
         document.getElementById("prfcrdsgp").innerHTML = "SG-" + user.sgrp;
-        document.getElementById("prfcrdddc").innerHTML = user.getSubsDay;
-        document.getElementById("prfcrdnam").innerHTML = user.getName;
+        document.getElementById("prfcrdddc").innerHTML = user.getSubsDay();
+        document.getElementById("prfcrdnam").innerHTML = user.getName();
         document.getElementById("prfcrdema").innerHTML = user.email;
         document.getElementById("prfcrdpwd").innerHTML = user.pwd;
         document.getElementById("prfcrdimg").src = user.getPdp();
@@ -135,17 +124,23 @@ function prf3mer() {
     if(navigator.onLine) {
         const customer = JSON.parse(localStorage.getItem('chkedlgn'));
         if (!customer) {
-                setTimeout(function() { 
-                    document.getElementById('bnzr').className = 'bnvz1_';
-                }, 1500);
+            console.log('You must connect');
+            setTimeout(function() { 
+                document.getElementById('bnzr').className = 'bnvz1_';
+            }, 1500);
         } else {
-            if(user.login(customer.username,customer.password,true)) {
-                loginSuccess();
-            } else {
-                setTimeout(function() { 
-                    document.getElementById('bnzr').className = 'bnvz1_';
-                }, 1500);
-            }
+            user.login(customer.username,customer.password,true, (err,result) => {
+                if (err) return console.error(err);
+                console.log("user session: " + result);
+                if(result) {
+                    loginSuccess();
+                } else {
+                    console.log('Username And password checked are false');
+                    setTimeout(function() { 
+                        document.getElementById('bnzr').className = 'bnvz1_';
+                    }, 1500);
+                }
+            });
         }
     } else {
         alertada('You are Offline')
@@ -154,11 +149,19 @@ function prf3mer() {
 
 function yahlogin() {
     alertada();
-    if(user.login(document.getElementById('nmusr').value,document.getElementById('pscod').value,document.getElementById('chkedbox').checked)) {
-        loginSuccess();
-    } else {
-        alertada('Password or email incorrect try again');
-    }         
+    let username = document.getElementById('nmusr').value;
+    let passcode = document.getElementById('pscod').value;
+    let checkBox = document.getElementById('chkedbox').checked;
+    user.login(username,passcode,checkBox, (err,result) => {
+        if (err) return console.error(err);
+        console.log("user session: " + result);
+        if(result) {
+            loginSuccess();
+        } else {
+            console.log('Password or email incorrect try again');
+            alertada('Password or email incorrect try again');
+        }
+    });       
 }
 
 
@@ -170,8 +173,6 @@ $('#lgout').click(function() {
     document.getElementById('itm3').className = 'sdmn_';
     $('.wrapper').css('opacity', '0');
     document.getElementById('ntfbar').className = 'notif_';
-    document.getElementById('viewifram').className = 'ifram_';
-    document.querySelector('.canvascontainer').scrollTop = 0;
     document.getElementById('lyoutkhdmi').className = 'elyout_';
     document.getElementById('lyoutkhdmi').innerHTML = '';
     setTimeout(function() { 
@@ -186,11 +187,9 @@ $('#lgout').click(function() {
     $('#hme').click();
     $('#hmes1').click();
 });
-
 $('#lssign').click(function() {
     yahlogin();
 });
-
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         if (document.getElementById('sgninitm').className == "singindiv" && $('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
@@ -202,13 +201,89 @@ $(document).on('keypress',function(e) {
     }
 });
 
-$('#alertada span').click(function() {
-    $('.bcblak').click();
+
+
+//NOTIF APP
+
+$('#nws').click(function() {
+    if (user.session) {
+        $.post("https://edifyfox.com/php/notifupdate.php", {
+            sclvl : user.sclevel,
+            sclsec : user.sec,
+            sclgrp : user.grp,
+            scSgrp : user.sgrp,
+            sesID : user.id
+        }, function(result){
+            console.log(result);
+        });
+    }
+    if (document.getElementById('ntfbar').className == 'notif') {
+        document.getElementById('ntfbar').className = 'notif_';
+    } else {
+        document.getElementById('ntfbar').className = 'notif';
+    }
 });
 
+$('.wrapper').click(function() {
+    if (document.getElementById('ntfbar').className == 'notif') {
+        $('.edwe').css('backdrop-filter','unset');
+        document.getElementById('ntfbar').className = 'notif_';
+        if (user.session) {
+            $.post("https://edifyfox.com/php/notifupdate.php", {
+                sclvl : user.sclevel,
+                sclsec : user.sec,
+                sclgrp : user.grp,
+                scSgrp : user.sgrp,
+                sesID : user.id
+            }, function(result){
+                console.log(result);
+            });
+        }
+    }
+});
 
+var start = 10;
 
+$('#ajtcbzf').click(function() {
+    document.getElementById('ajtcbzf').innerHTML = "";
+    document.getElementById('ajtcbzf').className = "switcher_LOAD";
+    document.getElementById('ajtcbzf').style.width = '20px';
+    document.getElementById('ajtcbzf').style.height = '20px';
+    document.getElementById('ajtcbzf').style.margin = '30px auto';
+    start = start + 10;
+});
 
+function loadnotif() {
+    if (user.session && navigator.onLine) {
+        $.ajax({
+            url: 'https://edifyfox.com/php/notifreader.php',
+            method: 'POST',
+            data: {
+                option : start,
+                sclvl : user.sclevel,
+                sclsec : user.sec,
+                sclgrp : user.grp,
+                scSgrp : user.sgrp,
+                sesID : user.id
+            },
+            dataType: 'json',
+            success: function(data) {
+                $('#ntfwrapthings').html(data.tb);
+                if(data.num > 0) {
+                    $('#spinoza').css('opacity', '1');
+                } else {
+                    $('#spinoza').css('opacity', '0');
+                }
+                $('#spinoza').html(data.num);
+                document.getElementById('ajtcbzf').style.width = '90px';
+                document.getElementById('ajtcbzf').style.height = 'auto';
+                document.getElementById('ajtcbzf').style.margin = '30px auto';
+                document.getElementById('ajtcbzf').className = "bgtncbzf";
+                document.getElementById('ajtcbzf').innerHTML = "LOAD MORE";
+            }
+        });        
+    }
+}
 
 
 
@@ -218,16 +293,11 @@ $('#alertada span').click(function() {
 
 // MODULE VOLET
 
-function mdularaya(sclvl) {
-
-    if (SESSION.id != '') {
-
+function mdularaya() {
+    if (user.session) {
         var xhh = new XMLHttpRequest();
         var url = 'https://edifyfox.com/php/modulesreader.php';
-        
-        
-        var data_post ="sm1="+sclvl;
-        
+        var data_post ="sm1="+user.sclevel;
         xhh.open('POST', url, true);
         xhh.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhh.onreadystatechange = function() {
@@ -237,17 +307,12 @@ function mdularaya(sclvl) {
         }
         xhh.send(data_post);
     }
-
 }
 
 // ELEMENT CHOISE VOLET
 
-
 function getcourse(evt) {
-        $('.dialogwrap').css('display', 'block');
-        setTimeout(function() {
-            $('.dialogwrap').css('opacity', '1');
-        }, 100);
+        alertada();
         var formdata = new FormData();
         formdata.append("ys", evt);
         var ajax = new XMLHttpRequest();
@@ -266,26 +331,10 @@ function getcourse(evt) {
 
 
 function getelyout(evtt) {
-
     document.getElementById('hanadl').className = 'dialogwin';
-    var arrayBut = 't';
-    var obs = JSON.parse(localStorage.getItem('store'));
-
-    for(i = 1; i < obs.length; i++) {
-        var str = obs[i];
-        var idget = str.split("-");
-        if (evtt == idget[1]) {
-            var xsm = str.split("[");
-            var ysm = xsm[1].split("]");
-            var xysm = ysm[0];
-            arrayBut += '/' + xysm;
-        }
-    }
-
     var data_post = new FormData();
     var ajax = new XMLHttpRequest();
     data_post.append("id", evtt);
-    data_post.append("arryoff", arrayBut);
     ajax.addEventListener("load", function(event) {
         document.getElementById('lyoutkhdmi').innerHTML = event.target.response;
         $('.bcblak').click();
@@ -293,8 +342,6 @@ function getelyout(evtt) {
     }, false);
     ajax.open("POST", "https://edifyfox.com/php/lyoutreader.php");
     ajax.send(data_post);
-    
-    
 }
 
 
@@ -339,15 +386,6 @@ function lyutfermer() {
     document.getElementById('lyoutkhdmi').className = 'elyout_';
     document.getElementById('lyoutkhdmi').innerHTML = '';
 }
-
-
-
-
-
-
-
-
-
 
 
 function openTool(stbr) {

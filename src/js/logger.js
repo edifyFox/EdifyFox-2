@@ -17,50 +17,6 @@ class User {
 		this.imgSrc = '';
 		this.session = false;
 	}
-	authenticate(ss) {
-		this.id = ss.id;
-		this.firstname = ss.firstname;
-		this.lastname = ss.lastname;
-		this.email = ss.email;
-		this.pwd = ss.pwd;
-		this.ddn = ss.ddn;
-		this.country = ss.country;
-		this.gender = ss.gender;
-		this.sclevel = ss.sclevel;
-		this.sec = ss.sec;
-		this.grp = ss.grp;
-		this.sgrp = ss.sgrp;
-		this.ddc = ss.ddc;
-		this.imgSrc = ss.ip;
-		this.session = true;
-	}
-	login(nmusr,pscod,checked) {
-		var status = false;
-		$.ajax({
-			url: 'https://edifyfox.com/php/chkedlogin.php',
-			method: 'POST',
-			data: {
-				login: nmusr,
-				pwd: pscod
-			},
-			dataType: 'json',
-			success: function(root) {
-				 if(root.id!="nan"){
-					this.authenticate(root);
-					if (checked) {
-						localStorage.setItem('chkedlgn', JSON.stringify({"username" : nmusr,"password" : pscod}));
-					}
-					console.log("this is root ;",root);
-					console.log('Login successful');
-					status = true;
-				} else {
-					console.log('Password or email incorrect try again');
-					status = false;
-				}
-			}
-		});
-		return status;
-	}
 	getName() {
 		return `${this.firstname} ${this.lastname}`;
 	}
@@ -75,25 +31,25 @@ class User {
 		return `${dDate.getDate()} ${this.monthNames[dDate.getMonth()]} ${dDate.getFullYear()}`;
 	}
 	getSubsDay() {
-		let cDate = new Date(ddc);
-		return `${monthNames[cDate.getMonth()]} ${cDate.getFullYear()}`;
+		let cDate = new Date(this.ddc);
+		return `${this.monthNames[cDate.getMonth()]} ${cDate.getFullYear()}`;
 	}
 	getLevel() {
-		switch (this.sclevel) {
+		switch (parseInt(this.sclevel)) {
 			case 1:
 				return "1st year student";
 				break;
 			case 2:
-				return "1st year student";
+				return "2nd year student";
 				break;
 			case 3:
-				return "1st year student";
+				return "3rd year student";
 				break;
 			case 4:
-				return "1st year student";
+				return "4th year student";
 				break;
 			case 5:
-				return "1st year student";
+				return "5th year student";
 				break;			
 			default:
 				return "student";
@@ -107,7 +63,50 @@ class User {
 			return "img/defaultprf.jpg";
 		}
 	}
+	login(nmusr,pscod,checked,callBack) {
+		var formdata = new FormData();
+		formdata.append("login", nmusr);
+		formdata.append("pwd", pscod);
+		var ajax = new XMLHttpRequest();
+		ajax.addEventListener("load", (event) => {
+			var root = JSON.parse(event.target.response);
+			if(root.id == "nan") {
+				this.logout();
+				console.log('Password or email incorrect try again ...');
+				// callBack("{error: Password or email incorrect try again ...}");
+				callBack(null,this.session);
+			} else {
+				this.authenticate(root);
+				if (checked) {
+					localStorage.setItem('chkedlgn', JSON.stringify({"username" : nmusr,"password" : pscod}));
+					console.log('Login saved ...');
+				}
+				console.log('Login successful ...');
+				callBack(null,this.session);
+			}
+		}, true);
+		ajax.open("POST", "https://edifyfox.com/php/chkedlogin.php");
+		ajax.send(formdata);
+	}
+	authenticate(root) {
+		this.id = root.id;
+		this.firstname = root.firstname;
+		this.lastname = root.lastname;
+		this.email = root.email;
+		this.pwd = root.pwd;
+		this.ddn = root.ddn;
+		this.country = root.country;
+		this.gender = root.gender;
+		this.sclevel = root.sclevel;
+		this.sec = root.sec;
+		this.grp = root.grp;
+		this.sgrp = root.sgrp;
+		this.ddc = root.ddc;
+		this.imgSrc = root.ip;
+		this.session = true;
+	}
 	logout() {
+		console.log('Logout ...');
 		this.id = '';
 		this.firstname = '';
 		this.lastname = '';
@@ -122,6 +121,7 @@ class User {
 		this.ddc = '';
 		this.imgSrc = '';
 		this.session = false;
+		console.log('see you later ...');
 	}
 
 }
