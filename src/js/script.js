@@ -96,9 +96,8 @@ function loginSuccess() {
             document.getElementById('itm3').className = 'sdmn';
             $('.wrapper').css('opacity', '1');
         }, 2400);
-        document.getElementById('nmusr').value = "";
-        document.getElementById('pscod').value = "";
-        document.getElementById('chkedbox').checked = false;
+        $("#signupFORM")[0].reset();
+        $("#signinFORM")[0].reset();
         console.log('Welcome');
     }
 }
@@ -192,7 +191,7 @@ $('#lssign').click(function() {
 });
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
-        if (document.getElementById('sgninitm').className == "singindiv" && $('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
+        if (document.getElementById('suppdiv').className == "signupdiv_" && $('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
             yahlogin();
         }
         if (document.getElementById('anm2').className == "firscard" && document.getElementById('editthings1').className == "inputat_" && document.getElementById('editthings2').className == "inputatmn_") {

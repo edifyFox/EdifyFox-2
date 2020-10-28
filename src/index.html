@@ -29,9 +29,9 @@
                 <div class="st" id="stin">Login</div>
                 <div class="lildescin">Welcome back, Please login in to your account</div>
             </div>
-            <form style="display: block;position: relative;margin-top: 45px;">
+            <form style="display: block;position: relative;margin-top: 45px;" id="signinFORM">
                 <div class="frm">
-                    <div class="lb">email or username</div>
+                    <div class="lb">email</div>
                     <input class="inptxt" type="text" name="nmusr" id="nmusr">
                 </div>
                 <div class="frm">
@@ -62,31 +62,31 @@
                 <div class="st" id="stin">Sign up</div>
                 <div class="lildescin">Let's get you all set up so you can begin studing with edifyfox</div>
             </div>
-            <form style="display: block;position: relative;margin-top: 45px;">
+            <form style="display: block;position: relative;margin-top: 45px;" id="signupFORM">
                 <div class="sgndiv">
                     <div class="sgnsdiv">
                         <label class="lb">first name</label>
-                        <input type="text" class="inptxt" id="frstnm" placeholder="Jack" tabindex="-1">
+                        <input type="text" class="inptxt" id="frstnm" placeholder="Rafal" tabindex="-1">
                     </div>
                     <div class="sgnsdiv">
                             <label class="lb">last name</label>
-                            <input type="text "class="inptxt" id="scdnm" placeholder="Boualaqa" tabindex="-1">
+                            <input type="text "class="inptxt" id="scdnm" placeholder="Boubker" tabindex="-1">
                     </div>
                 </div>
                
                 <div class="sgndiv" style="display: block;">
                     <label class="lb">email</label>
-                    <input type="email" class="inptxt" id="mailchk" placeholder="test@test.test" tabindex="-1">
+                    <input type="email" class="inptxt" id="mailchk" placeholder="someone@domain.com" tabindex="-1">
                 </div>
 
                 <div class="sgndiv">
                     <div class="sgnsdiv">
                         <label class="lb">password</label>
-                        <input type="password" class="inptxt" id="pwd" placeholder="minimum 8 character" tabindex="-1">
+                        <input type="password" class="inptxt" id="pwd" placeholder="passcode" tabindex="-1">
                     </div>
                     <div class="sgnsdiv">
                         <label class="lb">Confirm password</label>
-                        <input type="password" class="inptxt" id="pwdc" placeholder="minimum 8 character" tabindex="-1">
+                        <input type="password" class="inptxt" id="pwdc" placeholder="confirm" tabindex="-1">
                     </div>
                 </div>
 
@@ -166,38 +166,24 @@
                 </div>
 
                 <div class="sgndiv" style="grid-template-columns: none;grid-gap: 5px;">
-                    <label class="lb" style="margin-bottom: 15px;margin-top: 10px;">gender</label>
-                    <div class="sgnsdiv" style="grid-template-columns: auto auto;grid-gap: 5px;display: grid;text-align: center;">
-                        <div class="sgnsdiv">
-                            <input type="radio" name="sexe" id="male" tabindex="-1">
-                            <label class="lb" for="male" style="color: #ffffffc7;cursor: pointer;">Male</label>
-                        </div>
-                        <div class="sgnsdiv">
-                            <input type="radio" name="sexe" id="female" tabindex="-1">
-                            <label class="lb" for="female" style="color: #ffffffc7;cursor: pointer;">female</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sgndiv" style="grid-template-columns: none;grid-gap: 5px;">
                     <label class="lb" style="margin-bottom: 10px;margin-top: 10px;">School Level</label>
                     <div class="sgnsdiv">
                         <select class="birth" style="width: 100%;" id="mustawa" tabindex="-1">
                                 <option value="none">Choose</option>
                                 <option value="1">1st Year</option>
                                 <option value="2">2nd Year</option>
-                                <option disabled value="3">3rd Year</option>
-                                <option disabled value="4">4th Year</option>
-                                <option disabled value="5">5th Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="sgndiv" id="brnc" style="display:none;grid-template-columns: none;grid-gap: 5px;">
+                <div class="sgndiv" id="brnc" style="grid-template-columns: none;grid-gap: 5px;">
                         <label class="lb" style="margin-bottom: 10px;margin-top: 10px;">branch</label>
                         <div class="sgnsdiv">
                             <select class="birth" style="width: 100%;" id="branche" tabindex="-1">
                                     <option value="none">Choose</option>
+                                    <option value="CPI_API">CPI/API</option>
                                     <option value="TC3A">TC3A</option>
                                     <option value="GC">GC</option>
                                     <option value="GIP">GIP</option>
@@ -214,55 +200,55 @@
                         <div class="sgnsdiv">
                             <select class="birth" style="width: 100%;" id="sec" tabindex="-1">
                                     <option value="none">Choose</option>
-                                    <option value="1" disabled class="for12">SEC 1</option>
-                                    <option value="2" disabled class="for12">SEC 2</option>
-                                    <option value="3" disabled class="for12345">SEC 3</option>
-                                    <option value="4" disabled class="for12345">SEC 4</option>
-                                    <option value="5" disabled class="for12345">SEC 5</option>
+                                    <option value="1">SEC 1</option>
+                                    <option value="2">SEC 2</option>
+                                    <option value="3">SEC 3</option>
+                                    <option value="4">SEC 4</option>
+                                    <option value="5">SEC 5</option>
                             </select>
                         </div>
                 </div>
 
-
-                <label class="lb" style="margin-top: 10px;">Group & SG</label>
-                <div class="sgndiv">
-                        <div class="sgnsdiv">
-                            <select class="birth" style="width: 100%;" id="grp" tabindex="-1">
-                                    <option value="none">Choose</option>
-                                    <option value="11" disabled class="forsec1">G11</option>
-                                    <option value="12" disabled class="forsec1">G12</option>
-                                    <option value="13" disabled class="forsec1">G13</option>
-                                    <option value="14" disabled class="forsec1">G14</option>
-                                    <option value="15" disabled class="forsec1">G15</option>
-
-                                    <option value="21" disabled class="forsec2">G21</option>
-                                    <option value="22" disabled class="forsec2">G22</option>
-                                    <option value="23" disabled class="forsec2">G23</option>
-                                    <option value="24" disabled class="forsec2">G24</option>
-                                    <option value="25" disabled class="forsec2">G25</option>
-
-                                    <option value="1" disabled class="forsec3">G1</option>
-                                    <option value="2" disabled class="forsec3">G2</option>
-                                    <option value="3" disabled class="forsec3">G3</option>
-                                    <option value="4" disabled class="forsec3">G4</option>
-                                    <option value="5" disabled class="forsec3">G5</option>
-                            </select>
-                        </div>
-                        <div class="sgnsdiv" >
-                                <select class="birth" style="width: 100%;" id="sgrp" tabindex="-1">
+                <div class="sgndiv" style="grid-template-columns: auto;grid-gap: 15px;">
+                    <label class="lb" style="margin-top: 10px;">Group & SG</label>
+                    <div class="sgndiv">
+                            <div class="sgnsdiv">
+                                <select class="birth" style="width: 100%;" id="grp" tabindex="-1">
                                         <option value="none">Choose</option>
-                                        <option value="1">SG-1</option>
-                                        <option value="2">SG-2</option>
-                                        <option disabled value="sg3">SG 3</option>
+                                        <option value="11">G11</option>
+                                        <option value="12">G12</option>
+                                        <option value="13">G13</option>
+                                        <option value="14">G14</option>
+                                        <option value="15">G15</option>
+                                        <option value="21">G21</option>
+                                        <option value="22">G22</option>
+                                        <option value="23">G23</option>
+                                        <option value="24">G24</option>
+                                        <option value="25">G25</option>
+                                        <option value="1">G1</option>
+                                        <option value="2">G2</option>
+                                        <option value="3">G3</option>
+                                        <option value="4">G4</option>
+                                        <option value="5">G5</option>
                                 </select>
-                        </div>
+                            </div>
+                            <div class="sgnsdiv" >
+                                    <select class="birth" style="width: 100%;" id="sgrp" tabindex="-1">
+                                            <option value="none">Choose</option>
+                                            <option value="1">SG-1</option>
+                                            <option value="2">SG-2</option>
+                                            <option value="3">SG-3</option>
+                                    </select>
+                            </div>
+                    </div>
                 </div>
 
-
-                <div class="sgndiv">
-                        <div class="butsign" id="lssignup" style="margin-top: 20px;">Sign up</div>
+                <div class="loginButtons" style="margin-top: 10px;">
+                    <div class="butsign2" id="cnfsignup">Sign up</div>
                 </div>
+                
             </form>
+            
         </div>
         <div id="strtitm1" class="artwrk_">
         </div>

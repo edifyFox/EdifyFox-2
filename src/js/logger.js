@@ -7,14 +7,14 @@ class User {
 		this.email = '';
 		this.pwd = '';
 		this.ddn = '';
-		this.gender = '';
-		this.country = '';
 		this.sclevel = '';
+		this.branche = '';
 		this.sec = '';
 		this.grp = '';
 		this.sgrp = '';
 		this.ddc = '';
 		this.imgSrc = '';
+		this.adresse = '';
 		this.session = false;
 	}
 	getName() {
@@ -95,14 +95,14 @@ class User {
 		this.email = root.email;
 		this.pwd = root.pwd;
 		this.ddn = root.ddn;
-		this.country = root.country;
-		this.gender = root.gender;
 		this.sclevel = root.sclevel;
+		this.branche = root.branche;
 		this.sec = root.sec;
 		this.grp = root.grp;
 		this.sgrp = root.sgrp;
 		this.ddc = root.ddc;
 		this.imgSrc = root.ip;
+		this.adresse = root.adresse;
 		this.session = true;
 	}
 	logout() {

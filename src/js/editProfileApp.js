@@ -409,21 +409,7 @@ $("#cntry").change(function() {
 
 
 
-$('#stup').click(function() {
-    this.className = 'st';
-    document.getElementById('stin').className = 'st opac';
 
-    document.getElementById('sgninitm').className = 'singindiv_';
-    document.getElementById('sgnupitm').className = 'signupdiv';
-});
-
-$('#stin').click(function() {
-    this.className = 'st';
-    document.getElementById('stup').className = 'st opac';
-
-    document.getElementById('sgninitm').className = 'singindiv';
-    document.getElementById('sgnupitm').className = 'signupdiv_';
-});
 
 
 $("#file1").change(function() {
