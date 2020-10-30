@@ -132,6 +132,7 @@ $("#cnfsignup").on('click',function() {
 
 
 // EVENT LISENER
+
 $('#signup').click(function () {
     document.getElementById("suppdiv").className = "signupdiv";
     $("#suppdiv").scrollTop(0);

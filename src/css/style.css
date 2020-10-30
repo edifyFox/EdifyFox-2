@@ -1436,18 +1436,19 @@ select option[disabled] {
 .mantit {
     display: block;
     font-size: 40px;
-    text-transform: uppercase;
-    font-family: serif;
-    letter-spacing: 1px;
+    text-transform: capitalize;
+    font-family: 'Raleway';
+    font-weight: 600;
+    color: #ddd;
 }
 .manstit {
     display: block;
-    font-size: 11px;
-    text-transform: uppercase;
-    font-family: 'Brandon';
+    font-size: 15px;
+    text-transform: capitalize;
+    font-family: 'Raleway';
     margin-bottom: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    margin-top: 6px;
+    font-weight: 300;
     color: #ffffff7a;
 }
 .modulwrap {
@@ -2009,15 +2010,15 @@ section.mdulelm {
 
 .alertthing {
     position: absolute;
-    background: #fff;
-    color: #333;
+    background: #eee;
+    color: #171717;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 300px;
-    height: 180px;
-    border-radius: 4px;
-    box-shadow: 0px 2px 22px 5px rgba(0, 0, 0, 0.7);
+    width: 400px;
+    height: 200px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 12px rgb(0 0 0 / 86%);
     font-family: 'Brandon';
     text-transform: uppercase;
     font-weight: 900;
@@ -2029,10 +2030,11 @@ section.mdulelm {
 .alertthing h1 {
     font-size: 25px;
     font-family: 'Raleway';
-    letter-spacing: 1px;
+    letter-spacing: 0px;
     padding-left: 20px;
-    color: #233644;
+    color: #0077ce;
     margin-top: 25px;
+    text-transform: capitalize;
 }
 .alertthing label {
     display: block;

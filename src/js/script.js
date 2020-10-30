@@ -129,16 +129,20 @@ function prf3mer() {
             }, 1500);
         } else {
             user.login(customer.username,customer.password,true, (err,result) => {
-                if (err) return console.error(err);
-                console.log("user session: " + result);
-                if(result) {
-                    loginSuccess();
+                if (err) {
+                    console.log(err);
+                    alertada(err);
                 } else {
-                    console.log('Username And password checked are false');
-                    setTimeout(function() { 
-                        document.getElementById('bnzr').className = 'bnvz1_';
-                    }, 1500);
-                }
+                    console.log("user session: " + result);
+                    if(result) {
+                        loginSuccess();
+                    } else {
+                        console.log('Username And password checked are false');
+                        setTimeout(function() { 
+                            document.getElementById('bnzr').className = 'bnvz1_';
+                        }, 1500);
+                    }
+                } 
             });
         }
     } else {
@@ -152,14 +156,19 @@ function yahlogin() {
     let passcode = document.getElementById('pscod').value;
     let checkBox = document.getElementById('chkedbox').checked;
     user.login(username,passcode,checkBox, (err,result) => {
-        if (err) return console.error(err);
         console.log("user session: " + result);
-        if(result) {
-            loginSuccess();
+        if (err) {
+            console.log(err);
+            alertada(err);
         } else {
-            console.log('Password or email incorrect try again');
-            alertada('Password or email incorrect try again');
-        }
+            console.log("user session: " + result);
+            if(result) {
+                loginSuccess();
+            } else {
+                console.log('Password or email incorrect try again');
+                alertada('Password or email incorrect try again');
+            }
+        } 
     });       
 }
 
@@ -391,4 +400,9 @@ function openTool(stbr) {
     const {shell} = require('electron');
     var linktl = `https://edifyfox.com/tools/${stbr}`;
     shell.openExternal(linktl);
+}
+
+function openLink(link) {
+    const {shell} = require('electron');
+    shell.openExternal(link);
 }

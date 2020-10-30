@@ -73,8 +73,11 @@ class User {
 			if(root.id == "nan") {
 				this.logout();
 				console.log('Password or email incorrect try again ...');
-				// callBack("{error: Password or email incorrect try again ...}");
 				callBack(null,this.session);
+			} else if (root.id == "verifcation") {
+				this.logout();
+				console.log(root.msg);
+				callBack("Email Verification is required.\n An email was sent to you please check your primary inbox or Junk emails",null);
 			} else {
 				this.authenticate(root);
 				if (checked) {

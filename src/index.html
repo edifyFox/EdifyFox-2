@@ -44,7 +44,7 @@
                         <label for="chkedbox" class="lb2">Remember me</label>
                     </div>
                     <div class="forgetme">
-                        <label class="lb2">Forget password ?</label>
+                        <label class="lb2" onclick="openLink(`https://edifyfox.com/forgetPassword`)">Forget password ?</label>
                     </div>
                 </div>
                 <div class="loginButtons">
@@ -133,7 +133,7 @@
                                 <select class="birth" id="mois" tabindex="-1">
                                     <option value="none">Mounth</option>
                                     <option value="January">January</option>
-                                    <option value="Febuary">Febuary</option>
+                                    <option value="February">February</option>
                                     <option value="March">March</option>
                                     <option value="April">April</option>
                                     <option value="May">May</option>
@@ -185,6 +185,7 @@
                                     <option value="none">Choose</option>
                                     <option value="CPI_API">CPI/API</option>
                                     <option value="TC3A">TC3A</option>
+                                    <option value="TC4A">TC4A</option>
                                     <option value="GC">GC</option>
                                     <option value="GIP">GIP</option>
                                     <option value="GM">GM</option>
@@ -200,11 +201,14 @@
                         <div class="sgnsdiv">
                             <select class="birth" style="width: 100%;" id="sec" tabindex="-1">
                                     <option value="none">Choose</option>
-                                    <option value="1">SEC 1</option>
-                                    <option value="2">SEC 2</option>
-                                    <option value="3">SEC 3</option>
-                                    <option value="4">SEC 4</option>
-                                    <option value="5">SEC 5</option>
+                                    <option value="1">SEC-1</option>
+                                    <option value="2">SEC-2</option>
+                                    <option value="3">SEC-3</option>
+                                    <option value="4">SEC-4</option>
+                                    <option value="5">SEC-5</option>
+                                    <option value="6">SEC-6</option>
+                                    <option value="7">SEC-7</option>
+                                    <option value="8">SEC-8</option>
                             </select>
                         </div>
                 </div>
@@ -215,21 +219,16 @@
                             <div class="sgnsdiv">
                                 <select class="birth" style="width: 100%;" id="grp" tabindex="-1">
                                         <option value="none">Choose</option>
-                                        <option value="11">G11</option>
-                                        <option value="12">G12</option>
-                                        <option value="13">G13</option>
-                                        <option value="14">G14</option>
-                                        <option value="15">G15</option>
-                                        <option value="21">G21</option>
-                                        <option value="22">G22</option>
-                                        <option value="23">G23</option>
-                                        <option value="24">G24</option>
-                                        <option value="25">G25</option>
-                                        <option value="1">G1</option>
-                                        <option value="2">G2</option>
-                                        <option value="3">G3</option>
-                                        <option value="4">G4</option>
-                                        <option value="5">G5</option>
+                                        <option value="1">G-1</option>
+                                        <option value="2">G-2</option>
+                                        <option value="3">G-3</option>
+                                        <option value="4">G-4</option>
+                                        <option value="5">G-5</option>
+                                        <option value="6">G-6</option>
+                                        <option value="7">G-7</option>
+                                        <option value="8">G-8</option>
+                                        <option value="9">G-9</option>
+                                        <option value="10">G-10</option>
                                 </select>
                             </div>
                             <div class="sgnsdiv" >
@@ -586,7 +585,7 @@
     <div class="bcblak"></div>
     <img id="loadwin" class="lding_" src="icons/preloader.gif" alt="LOADING">
     <div id="alertada" class="alertthing">
-        <h1>Edify</h1>
+        <h1>Alert</h1>
         <label></label>
         <span>ok</span>
     </div>
