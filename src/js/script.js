@@ -77,6 +77,7 @@ var user = new User();
 
 function loginSuccess() {
     if(user.session){
+        setWishPerTime();
         mdularaya();
         // getScdlAndWeekNum(crntweek);
         prf3mer();
@@ -99,6 +100,22 @@ function loginSuccess() {
         $("#signupFORM")[0].reset();
         $("#signinFORM")[0].reset();
         console.log('Welcome');
+    }
+}
+
+function setWishPerTime() {
+    if (user.session) {
+        var day = new Date();
+        var hr = day.getHours();
+        if (hr >= 0 && hr < 12) {
+            document.getElementById("shname").innerHTML = `Good Morning ${user.firstname} !`;
+        } else if (hr == 12) {
+            document.getElementById("shname").innerHTML = `Good Noon ${user.firstname} !`;
+        } else if (hr >= 12 && hr <= 17) {
+            document.getElementById("shname").innerHTML = `Good Afternoon ${user.firstname} !`;
+        } else {
+            document.getElementById("shname").innerHTML = `Good Evening ${user.firstname} !`;
+        }
     }
 }
 
@@ -301,19 +318,22 @@ function loadnotif() {
 
 // MODULE VOLET
 
-function mdularaya() {
+function mdularaya(selectBox) {
     if (user.session) {
-        var xhh = new XMLHttpRequest();
-        var url = 'https://edifyfox.com/php/modulesreader.php';
-        var data_post ="sm1="+user.sclevel;
-        xhh.open('POST', url, true);
-        xhh.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhh.onreadystatechange = function() {
-            if(xhh.readyState == 4 && xhh.status == 200) {
-                document.getElementById('frstphp').innerHTML = xhh.response;
-            }
+        var formdata = new FormData();
+        formdata.append("sm1", user.sclevel);
+        formdata.append("branche", user.branche);
+        if (selectBox) {
+            alertada();
+            formdata.append("selectBox", selectBox);
         }
-        xhh.send(data_post);
+        var ajax = new XMLHttpRequest();
+        ajax.addEventListener("load", function(event) {
+            document.getElementById('crskhdmi').innerHTML = event.target.response;
+            if (selectBox) $('.bcblak').click();
+        }, false);
+        ajax.open("POST", "https://edifyfox.com/php/modulesreader.php");
+        ajax.send(formdata);
     }
 }
 

@@ -1,4 +1,5 @@
 $('#hme').click(function() {
+    setWishPerTime();
     $('.mainone').css('backdrop-filter','unset');
     document.getElementById('anm2').className = 'firscard_';
     document.getElementById('crskhdmi').className = 'courses_';
