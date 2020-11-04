@@ -1414,7 +1414,6 @@ select option[disabled] {
     left: 0;
     display: block;
     opacity: 0;
-    transform: scale(1.2);
     pointer-events: none;
     background: rgba(28,35,41,1);
     padding: 40px;
@@ -1423,6 +1422,14 @@ select option[disabled] {
     overflow-y: scroll;
     overflow-x: hidden;
     transition: all 0.3s ease-in-out;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform: translate3d(0,0,0);
+    transform: translateZ(0);
 }
 .courses {
     position: absolute;
@@ -1432,7 +1439,6 @@ select option[disabled] {
     left: 0;
     display: block;
     opacity: 1;
-    transform: scale(1);
     pointer-events: fill;
     background: rgb(28 35 41 / 80%);
     padding: 40px;
@@ -1441,12 +1447,92 @@ select option[disabled] {
     overflow-y: scroll;
     overflow-x: hidden;
     transition: all 0.3s ease-in-out;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform: translate3d(0,0,0);
+    transform: translateZ(0);
 }
 
 .manhead {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 340px;
 }
+
+.manheadtls {
+    position: relative;
+}
+
+.smantls {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.downarrow {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%) scaleX(1.3);
+    color: #ffffffb8;
+    pointer-events: none;
+}
+
+.manheadtls .select:hover + .downarrow {
+    color: #fff;
+}
+
+.manheadtls select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #2c3e50;
+    background-image: none;
+    font-family: 'Brandon';
+    font-weight: bold;
+    text-transform:uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+}
+.manheadtls option {
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: unset;
+    border: none !important;
+    outline: none;
+    letter-spacing: 2px;
+    background: #fff;
+    color: #000;
+}
+  /* Remove IE arrow */
+.manheadtls select::-ms-expand {
+    display: none;
+}
+  /* Custom Select */
+.manheadtls .select {
+    position: relative;
+    width: 100%;
+    height: 3em;
+    line-height: 3;
+    background: rgb(71,77,84);
+    overflow: hidden;
+    border-radius: 5px;
+}
+.manheadtls select {
+    padding: 0 15px;
+    color: #fff;
+    cursor: pointer;
+}
+
 
 .typeBack {
     position: absolute;
@@ -2021,10 +2107,10 @@ section.mdulelm {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 70vw;
-    background: rgb(34,41,46);
-    box-shadow: 0px 2px 5px #0000004d;
-    border-radius: 4px;
+    width: auto;
+    background: #eee;
+    box-shadow: 0px 2px 12px #000000e0;
+    border-radius: 10px;
     overflow: hidden;
     z-index: 1;
     opacity: 0;
@@ -2036,10 +2122,10 @@ section.mdulelm {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 70vw;
-    background: rgb(34,41,46);
-    box-shadow: 0px 2px 5px #0000004d;
-    border-radius: 4px;
+    width: auto;
+    background: #eee;
+    box-shadow: 0px 2px 12px #000000e0;
+    border-radius: 10px;
     overflow: hidden;
     z-index: 1;
     opacity: 1;
@@ -2113,15 +2199,19 @@ section.mdulelm {
 }
 .crsdiatbl {
     display: grid;
-    grid-template-columns: 300px auto auto auto auto auto;
+    grid-template-columns: 300px 55px 55px 80px 58px 75px;
+    grid-gap: 10px;
     text-align: center;
     padding: 20px 20px;
-    font-family: 'Brandon';
+    font-family: 'Raleway';
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 12px;
-    font-weight: 900;
-    color: #7386a5;
+    font-weight: 600;
+    color: #0f1929;
+    background: #ffffff;
+    border-bottom: 1px solid #1717173b;
+    box-shadow: 0px 2px 12px #00000012;
 }
 .crsdianmelem b {
     font-size: 9px;
@@ -2129,12 +2219,12 @@ section.mdulelm {
 .crsdialelem {
     display: grid;
     grid-template-columns: auto;
-    padding: 0 20px;
-    padding-bottom: 40px;
+    padding: 10px 20px;
+    color: #171717;
 }
 .elemelem {
     display: grid;
-    grid-template-columns: 300px auto auto auto auto auto;
+    grid-template-columns: 308px 60px 68px 85px 75px 80px;
     text-align: center;
     font-family: 'Brandon';
     letter-spacing: 1px;
@@ -2143,9 +2233,11 @@ section.mdulelm {
     font-weight: 900;
     cursor: pointer;
     padding: 8px 0;
+    border-radius: 15px;
+    overflow: hidden;
 }
 .elemelem:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgb(0 0 0 / 6%);
 }
 
 
