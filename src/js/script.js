@@ -10,7 +10,7 @@ var user = new User();
 
 //AUTOUPDATE MESSAGE
 ipcRenderer.on('messageUPDATE', (event,text) => {
-    console.log(`Message from updater : ${text}`);
+    alertada(text);
 });
 
 //DESABLE SELECTION
