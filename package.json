@@ -94,6 +94,7 @@
     "electron-log": "^4.2.4",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.3.5",
+    "jquery-ui": "^1.12.1",
     "localforage": "^1.9.0",
     "signcode": "^1.0.0",
     "update-electron-app": "^2.0.1"

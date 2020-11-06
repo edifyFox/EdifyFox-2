@@ -17,6 +17,7 @@ class User {
 		this.adresse = '';
 		this.sessionid = '';
 		this.session = false;
+		this.modification = false;
 	}
 	getName() {
 		return `${this.firstname} ${this.lastname}`;
@@ -114,6 +115,7 @@ class User {
 		this.imgSrc = root.ip;
 		this.adresse = root.adresse;
 		this.session = true;
+		this.modification = (root.modification == "1") ? true : false;
 	}
 	logout() {
 		console.log('Logout ...');
@@ -133,6 +135,7 @@ class User {
 		this.adresse = '';
 		this.sessionid = '';
 		this.session = false;
+		this.modification = false;
 		console.log('see you later ...');
 	}
 

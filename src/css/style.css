@@ -3215,6 +3215,23 @@ section.tlselm {
     transition: all 0.3s ease-in-out;
 }
 
+.shakeit {
+    animation: shake 0.5s;
+}
+  
+@keyframes shake {
+    0% {   transform: translate(-51%,-50%); }
+    20% {  transform: translate(-52%,-50%); }
+    30% {  transform: translate(-53%,-50%); }
+    40% {  transform: translate(-47%,-50%); }
+    50% {  transform: translate(-48%,-50%); }
+    60% {  transform: translate(-51%,-50%); }
+    70% {  transform: translate(-53%,-50%); }
+    80% {  transform: translate(-47%,-50%); }
+    90% {  transform: translate(-51%,-50%); }
+    100% { transform: translate(-50%,-50%); }
+}
+
 .bigwrapEditron {
     position: relative;
 }
@@ -3237,7 +3254,7 @@ section.tlselm {
     font-weight: 600;
     padding: 0 25px;
     grid-gap: 10px;
-    width: 300px;
+    grid-template-columns: auto auto auto auto auto;
 }
 .sgnsdiv_ {
     display: grid;
@@ -3253,6 +3270,10 @@ section.tlselm {
     padding: 5px 2px;
     text-transform: capitalize;
 }
+.sgnsdiv_ option {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 .oketron {
     cursor: pointer;
     position: relative;
@@ -3263,10 +3284,24 @@ section.tlselm {
     margin: 0 25px;
     margin-top: 25px;
     margin-bottom: 35px;
-    border: 1px solid #00000038;
+    box-shadow: 0px 2px 12px #0000002b;
     padding: 10px;
     border-radius: 15px;
 }
 .oketron:hover {
     background: #00000014;
+}
+
+.bigwrapEditron p {
+    display: block;
+    position: relative;
+    color: #000;
+    padding: 15px 25px;
+    padding-top: 0;
+    font-family: 'Brandon';
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0px 2px 10px #00000026;
+    font-size: 12px;
 }

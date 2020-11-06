@@ -5,12 +5,15 @@ const url = require('url');
 const path = require('path');
 const User = require(path.join(__dirname, 'js/logger.js'));
 
+// INITIATE USER
+var user = new User();
 
+//AUTOUPDATE MESSAGE
 ipcRenderer.on('messageUPDATE', (event,text) => {
     console.log(`Message from updater : ${text}`);
 });
 
-
+//DESABLE SELECTION
 if (typeof document.onselectstart != "undefined") {
     document.onselectstart = new Function ("return false");
 } else {
@@ -49,33 +52,44 @@ function alertada(msg) {
     }, 300);
 }
 $('.bcblak').click(function() {
-    alertadaT = false;
-    document.getElementById('hanadl').className = 'dialogwin';
-    document.getElementById('wrapEdits').className = 'dialogwinEdit_';
-    $('#alertada').css('opacity','0');
-    $('#alertada').css('pointer-events','none');
-    setTimeout(function() { 
-        $('.dialogwrap').css('opacity', '0');
-    }, 100);
-    setTimeout(function() { 
-        $('.dialogwrap').css('display', 'none');
-        document.getElementById('hanadl').innerHTML = '';
-        document.getElementById('wrapEdits').innerHTML = '';
-    }, 300);
+    if (!user.modification && document.getElementById('wrapEdits').className == 'dialogwinEdit_') {
+        document.getElementById('wrapEdits').className = "dialogwinEdit_ shakeit";
+        setTimeout(function() { 
+            document.getElementById('wrapEdits').className = "dialogwinEdit_";
+        }, 500);
+    } else {
+        alertadaT = false;
+        document.getElementById('hanadl').className = 'dialogwin';
+        document.getElementById('wrapEdits').className = 'dialogwinEdit';
+        $('#alertada').css('opacity','0');
+        $('#alertada').css('pointer-events','none');
+        setTimeout(function() { 
+            $('.dialogwrap').css('opacity', '0');
+        }, 100);
+        setTimeout(function() { 
+            $('.dialogwrap').css('display', 'none');
+            document.getElementById('hanadl').innerHTML = '';
+            document.getElementById('wrapEdits').innerHTML = '';
+        }, 300);
+    }
 });
 $('#alertada span').click(function() {
     $('.bcblak').click();
 });
 
 //OFFLINE ALLERT
+var notConnectedBool = true;
 setInterval(function(){
-    if(!navigator.onLine && $('#offmodeui').css('opacity') == 0) {alertada('You are Offline')}
-    if(!navigator.onLine && $('#offmodeui').css('opacity') == 1) {}
+    if(!navigator.onLine) {alertada('You are Offline')}
+    if(navigator.onLine && notConnectedBool) autoLogin();
 }, 1000);
 
+if(navigator.onLine) {
+    autoLogin()
+}
 
-// INITIATE USER
-var user = new User();
+
+
 
 function loginSuccess() {
     if(user.session){
@@ -99,6 +113,7 @@ function loginSuccess() {
         setTimeout(function() { 
             document.getElementById('itm3').className = 'sdmn';
             $('.wrapper').css('opacity', '1');
+            if (!user.modification) editron(1);
         }, 2400);
         $("#signupFORM")[0].reset();
         $("#signinFORM")[0].reset();
@@ -139,36 +154,33 @@ function prf3mer() {
     }
 }
 
-(() => {
-    if(navigator.onLine) {
-        const customer = JSON.parse(localStorage.getItem('chkedlgn'));
-        if (!customer) {
-            console.log('You must connect');
-            setTimeout(function() { 
-                document.getElementById('bnzr').className = 'bnvz1_';
-            }, 1500);
-        } else {
-            user.login(customer.username,customer.password,true, (err,result) => {
-                if (err) {
-                    console.log(err);
-                    alertada(err);
-                } else {
-                    console.log("user session: " + result);
-                    if(result) {
-                        loginSuccess();
-                    } else {
-                        console.log('Username And password checked are false');
-                        setTimeout(function() { 
-                            document.getElementById('bnzr').className = 'bnvz1_';
-                        }, 1500);
-                    }
-                } 
-            });
-        }
+function autoLogin() {
+    notConnectedBool = false;
+    const customer = JSON.parse(localStorage.getItem('chkedlgn'));
+    if (!customer) {
+        console.log('You must connect');
+        setTimeout(function() { 
+            document.getElementById('bnzr').className = 'bnvz1_';
+        }, 1500);
     } else {
-        alertada('You are Offline')
+        user.login(customer.username,customer.password,true, (err,result) => {
+            if (err) {
+                console.log(err);
+                alertada(err);
+            } else {
+                console.log("user session: " + result);
+                if(result) {
+                    loginSuccess();
+                } else {
+                    console.log('Username And password checked are false');
+                    setTimeout(function() { 
+                        document.getElementById('bnzr').className = 'bnvz1_';
+                    }, 1500);
+                }
+            } 
+        });
     }
-})();
+}
 
 function yahlogin() {
     alertada();
@@ -251,10 +263,61 @@ function setSessionData(operation) {
 
 // editPrflp
 document.getElementById('editPrflp').addEventListener('click', () => {
+    editron(0);
+});
+
+function checkSelectEdits(elm) {
+    if (elm.value != 'none') {
+        goodInput(elm);
+        return true
+    } else {
+        badInput(elm);
+        return false
+    }
+}
+function submitEditron() {
+    var checked = true;
+    var editLevel = $("#editLevel")[0];
+    var editBranche = $("#editBranche")[0];
+    var editSec = $("#editSec")[0];
+    var editGrp = $("#editGrp")[0];
+    var editSgrp = $("#editSgrp")[0];
+    var inputListsEdit = [editLevel,editBranche,editSec,editGrp,editSgrp];
+    inputListsEdit.forEach(element => {
+        checked = checkSelectEdits(element) ? checked : false;
+    });
+    if (checked) {
+        document.getElementById('wrapEdits').className = 'dialogwinEdit';
+        $.ajax({
+            type: "POST",
+            url: "https://edifyfox.com/php/editthingss.php",
+            data: {
+                idUsr: user.id,
+                editLevel: editLevel.value,
+                editBranche: editBranche.value,
+                editSec: editSec.value,
+                editGrp: editGrp.value,
+                editSgrp: editSgrp.value
+            },
+            success: (data, statuts) => {
+                if (data == "YESS") {
+                    document.getElementById('nmusr').value = user.email;
+                    document.getElementById('chkedbox').checked = true;
+                    $("#formEDITION")[0].reset();
+                    alertada('Cool your info has been updated now please login and enjoy studying :)')
+                    $('#lgout').click();
+                }
+            },
+            dataType: 'text'
+        });
+    }
+}
+function editron(msg) {
     if (user.session) {
         alertada();
         var formdata = new FormData();
         formdata.append("user", user.id);
+        formdata.append("msg", msg);
         var ajax = new XMLHttpRequest();
         ajax.addEventListener("load", function(event) {
             document.getElementById('wrapEdits').innerHTML = event.target.response;
@@ -265,7 +328,7 @@ document.getElementById('editPrflp').addEventListener('click', () => {
         ajax.open("POST", "https://edifyfox.com/php/editThings.php");
         ajax.send(formdata);
     }
-})
+}
 
 
 //NOTIF APP
@@ -466,3 +529,41 @@ function openLink(link) {
     const {shell} = require('electron');
     shell.openExternal(link);
 }
+
+
+// UPLOAD PIC
+
+$("#file1").change(function() {
+    if (user.session) {
+        var file = document.getElementById("file1").files[0];
+        if (file.size > 900000) { 
+            alertada('Sorry, your file is too large'); 
+        } else if (file.type != "image/jpg" && file.type != "image/jpeg") {
+            alertada('Sorry, only JPG, JPEG files are allowed.');
+        } else {
+            var formdata = new FormData();
+            formdata.append("file1", file);
+            formdata.append("visitorid", user.id);
+            var ajax = new XMLHttpRequest();
+            ajax.upload.addEventListener("progress", function(event) {
+                var percent = Math.round((event.loaded / event.total) * 100);
+                $('#prcentLabel').html(`${percent}%`);
+                $('#prcentLabel').css('opacity', '1');
+            }, false);
+            ajax.addEventListener("load", function(event) {
+                $('#prcentLabel').css('opacity', '0');
+                user.ip = event.target.responseText;
+                var reader = new FileReader();
+                reader.onload = (function(theFile) {
+                    return function(e) {
+                      document.getElementById("prfcrdimg").src = e.target.result;
+                    };
+                })(file);
+                reader.readAsDataURL(file);
+                $('#prcentLabel').html(`edit`);
+            }, false);
+            ajax.open("POST", "https://edifyfox.com/php/insertPicPrfl.php");
+            ajax.send(formdata);
+        } 
+    }
+});
