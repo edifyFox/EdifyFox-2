@@ -15,6 +15,7 @@ class User {
 		this.ddc = '';
 		this.imgSrc = '';
 		this.adresse = '';
+		this.sessionid = '';
 		this.session = false;
 	}
 	getName() {
@@ -62,6 +63,12 @@ class User {
 		} else {
 			return "img/defaultprf.jpg";
 		}
+	}
+	setSessionId(id) {
+		this.sessionid = id;
+	}
+	getSessionId() {
+		return this.sessionid;
 	}
 	login(nmusr,pscod,checked,callBack) {
 		var formdata = new FormData();
@@ -114,15 +121,17 @@ class User {
 		this.firstname = '';
 		this.lastname = '';
 		this.email = '';
+		this.pwd = '';
 		this.ddn = '';
-		this.country = '';
-		this.gender = '';
 		this.sclevel = '';
+		this.branche = '';
 		this.sec = '';
 		this.grp = '';
 		this.sgrp = '';
 		this.ddc = '';
 		this.imgSrc = '';
+		this.adresse = '';
+		this.sessionid = '';
 		this.session = false;
 		console.log('see you later ...');
 	}

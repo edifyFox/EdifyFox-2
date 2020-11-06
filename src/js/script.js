@@ -51,6 +51,7 @@ function alertada(msg) {
 $('.bcblak').click(function() {
     alertadaT = false;
     document.getElementById('hanadl').className = 'dialogwin';
+    document.getElementById('wrapEdits').className = 'dialogwinEdit_';
     $('#alertada').css('opacity','0');
     $('#alertada').css('pointer-events','none');
     setTimeout(function() { 
@@ -59,6 +60,7 @@ $('.bcblak').click(function() {
     setTimeout(function() { 
         $('.dialogwrap').css('display', 'none');
         document.getElementById('hanadl').innerHTML = '';
+        document.getElementById('wrapEdits').innerHTML = '';
     }, 300);
 });
 $('#alertada span').click(function() {
@@ -77,6 +79,7 @@ var user = new User();
 
 function loginSuccess() {
     if(user.session){
+        setSessionData('login');
         setWishPerTime();
         mdularaya();
         // getScdlAndWeekNum(crntweek);
@@ -122,7 +125,7 @@ function setWishPerTime() {
 function prf3mer() {
     if (user.session) {
         document.getElementById("prfcrdstt").innerHTML = user.getLevel();
-        document.getElementById("prfcrdgnd").innerHTML = user.gender;
+        document.getElementById("prfcrdgnd").innerHTML = user.branche;
         document.getElementById("prfcrdage").innerHTML = user.getAge();
         document.getElementById("prfcrdddn").innerHTML = user.getBirthday();
         document.getElementById("prfcrdsec").innerHTML = "sec-" + user.sec;
@@ -189,8 +192,8 @@ function yahlogin() {
     });       
 }
 
-
 $('#lgout').click(function() {
+    setSessionData('logout');
     user.logout();
     crntweek = crntdbssh;
     document.getElementById('bnzr').className = 'bnvz1_';
@@ -211,21 +214,58 @@ $('#lgout').click(function() {
     }, 1000);
     $('#hme').click();
     $('#hmes1').click();
+    $('.mainone').css('backdrop-filter','unset');
+    $('.maintwo').css('backdrop-filter','unset');
 });
 $('#lssign').click(function() {
     yahlogin();
 });
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
-        if (document.getElementById('suppdiv').className == "signupdiv_" && $('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
-            yahlogin();
-        }
-        if (document.getElementById('anm2').className == "firscard" && document.getElementById('editthings1').className == "inputat_" && document.getElementById('editthings2').className == "inputatmn_") {
-            editthings();
+        if (alertadaT) $('.bcblak').click();
+        else {
+            if (document.getElementById('suppdiv').className == "signupdiv_" && $('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
+                yahlogin();
+            }
         }
     }
 });
 
+document.getElementById('close').addEventListener('click',() => {
+    if (user.session) setSessionData('logout');
+})
+
+function setSessionData(operation) {
+    var formdata = new FormData();
+    formdata.append("idUsr", user.id);
+    formdata.append("operation",operation);
+    formdata.append("sessionid", user.getSessionId());
+    var ajax = new XMLHttpRequest();
+    ajax.addEventListener("load", (event) => {
+        if(operation == "login") user.setSessionId(parseInt(event.target.response));
+    });
+    ajax.open("POST", "https://edifyfox.com/php/setSessionData.php");
+    ajax.send(formdata);
+}
+
+
+// editPrflp
+document.getElementById('editPrflp').addEventListener('click', () => {
+    if (user.session) {
+        alertada();
+        var formdata = new FormData();
+        formdata.append("user", user.id);
+        var ajax = new XMLHttpRequest();
+        ajax.addEventListener("load", function(event) {
+            document.getElementById('wrapEdits').innerHTML = event.target.response;
+            setTimeout(function() {
+                document.getElementById('wrapEdits').className = 'dialogwinEdit_';
+            }, 300);
+        }, false);
+        ajax.open("POST", "https://edifyfox.com/php/editThings.php");
+        ajax.send(formdata);
+    }
+})
 
 
 //NOTIF APP
@@ -340,18 +380,18 @@ function mdularaya(selectBox) {
 // ELEMENT CHOISE VOLET
 
 function getcourse(evt) {
-        alertada();
-        var formdata = new FormData();
-        formdata.append("ys", evt);
-        var ajax = new XMLHttpRequest();
-        ajax.addEventListener("load", function(event) {
-            document.getElementById('hanadl').innerHTML = event.target.response;
-            setTimeout(function() { 
-                document.getElementById('hanadl').className = 'dialogwin_';
-            }, 300);
-        }, false);
-        ajax.open("POST", "https://edifyfox.com/php/elemtreader.php");
-        ajax.send(formdata);
+    alertada();
+    var formdata = new FormData();
+    formdata.append("ys", evt);
+    var ajax = new XMLHttpRequest();
+    ajax.addEventListener("load", function(event) {
+        document.getElementById('hanadl').innerHTML = event.target.response;
+        setTimeout(function() { 
+            document.getElementById('hanadl').className = 'dialogwin_';
+        }, 300);
+    }, false);
+    ajax.open("POST", "https://edifyfox.com/php/elemtreader.php");
+    ajax.send(formdata);
 }
 
 
@@ -376,7 +416,6 @@ function getelyout(evtt) {
 
   
 function showviewer(source, strEL, strFL, strTYPE) {
-
     const childWin = new BrowserWindow({ 
         width: 1000,
         height: 600,
@@ -385,14 +424,15 @@ function showviewer(source, strEL, strFL, strTYPE) {
         title: `${strEL} - ${strFL} - ${strTYPE}`,
         backgroundColor: '#eee',
         icon: __dirname+'/assets/app-icon/win/app.png',
-        frame: true,
+        alwaysOnTop: false,
+        frame: false,
         show: false,
         webPreferences: {
           nodeIntegration: true,
           enableRemoteModule: true
         }
     });
-    childWin.setParentWindow(require('electron').remote.getCurrentWindow())
+    // childWin.setParentWindow(require('electron').remote.getCurrentWindow());
     childWin.loadURL(
         url.format({
           pathname: path.join(__dirname, 'js/webViewer/public/index.html'),
@@ -402,7 +442,7 @@ function showviewer(source, strEL, strFL, strTYPE) {
     );
     childWin.once("show", () => {
         childWin.webContents.send("pdfSrc",source);
-        childWin.webContents.send("title",`${strEL} - ${strFL} - ${strTYPE}`);
+        childWin.webContents.send("title",`${strEL} - ${strTYPE}`);
     });
     childWin.once("ready-to-show", () => {
         childWin.show();

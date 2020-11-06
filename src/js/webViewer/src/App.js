@@ -7,7 +7,7 @@ function renderPDF(pdfSource) {
  	   path: '../public/lib',
  	   initialDoc: pdfSource,
  	}, viewerElement).then(instance => {
-	   instance.disableElements([ 'downloadButton', 'printButton' ]);
+	   instance.disableElements([ 'downloadButton', 'printButton', 'themeChangeButton' ]);
 	})
 }
 
@@ -16,5 +16,5 @@ ipcRenderer.on('pdfSrc', (event,text) => {
 });
 
 ipcRenderer.on('title', (event,text) => {
-    console.log(text);
+	document.getElementById('nmapp').innerHTML = text;
 });

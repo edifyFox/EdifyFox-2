@@ -8,14 +8,15 @@ let keyNewsDIV = document.createElement("DIV"),
 	descNewsDIV = document.createElement("DIV");
 
 keyNewsDIV.innerHTML = "News";
-keyNewsDIV.color = "skyblue";
-keyNewsDIV.fontWeight = "600";
 keyNewsDIV.setAttribute("class", "keyNLb");
 
 descNewsDIV.innerHTML = "AYOUR Bomber Jacket Availble On ayourclothing.com";
-descNewsDIV.color = "skyblue";
-descNewsDIV.fontWeight = "600";
 descNewsDIV.setAttribute("class", "descNLb");
+descNewsDIV.addEventListener("click",() => {
+  var link = "http://ayourclothing.com/";
+  const {shell} = require('electron');
+  shell.openExternal(link);
+});
 
 if (true) {
 	newsId.appendChild(keyNewsDIV);

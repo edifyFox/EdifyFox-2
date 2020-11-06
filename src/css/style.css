@@ -89,10 +89,12 @@ body {
     height: 30px;
     line-height: 30px;
     font-family: 'Raleway';
+    -webkit-app-region: no-drag;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 9px;
+    cursor: pointer;
     color: #ffffff78;
 }
 .descNLb {
@@ -874,10 +876,11 @@ select option[disabled] {
     z-index: 2;
     top: 0;
     left: 0;
+    box-shadow: 2px 0px 12px #00000047;
 }
 .maintwo {
     position: absolute;
-    background: rgb(35, 45, 53);
+    background: rgba(28, 35, 41, 0.9);
     top: 0;
     left: 360px;
     width: calc(100% - 360px);
@@ -1565,14 +1568,14 @@ select option[disabled] {
 .modulwrap {
     position: relative;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     grid-gap: 10px;
     margin-top: 20px;
 }
 .mdlSemTit {
     position: relative;
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 6;
     font-family: 'Brandon';
     font-weight: 900;
     font-size: 10px;
@@ -1585,7 +1588,14 @@ select option[disabled] {
     color: #ffffff94;
 }
 
-
+@media only screen and (max-width: 1315px) {
+    .modulwrap {
+        grid-template-columns: auto auto auto;
+    }
+    .mdlSemTit {
+        grid-column-end: 4;
+    }
+}
 
 
 
@@ -1756,9 +1766,15 @@ section.mdulelm {
 .wraplyut {
     position: relative;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     grid-gap: 20px 50px;
     padding: 0 40px;
+    padding-top: 20px;
+}
+@media only screen and (max-width: 1315px) {
+    .wraplyut {
+        grid-template-columns: auto auto;
+    }
 }
 
 
@@ -1861,23 +1877,8 @@ section.mdulelm {
     left: 32px;
     z-index: -1;
 }
-.dvlscsduwaraC {
+.dvlscsduwara {
     display: block;
-    background: rgb(26, 85, 78);
-    border-radius: 100%;
-    width: 26px;
-    height: 25px;
-}
-.dvlscsduwaraT {
-    display: block;
-    background: rgb(101, 55, 25);
-    border-radius: 100%;
-    width: 26px;
-    height: 25px;
-}
-.dvlscsduwaraE {
-    display: block;
-    background: rgb(33, 72, 99);
     border-radius: 100%;
     width: 26px;
     height: 25px;
@@ -2158,14 +2159,14 @@ section.mdulelm {
 
 .alertthing {
     position: absolute;
-    background: #eee;
+    background: #ddd;
     color: #171717;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     width: 400px;
     height: 200px;
-    border-radius: 8px;
+    border-radius: 15px;
     box-shadow: 0px 2px 12px rgb(0 0 0 / 86%);
     font-family: 'Brandon';
     text-transform: uppercase;
@@ -2174,19 +2175,24 @@ section.mdulelm {
     pointer-events: none;
     transition: .3s;
     z-index: 9;
+    overflow: hidden;
 }
 .alertthing h1 {
-    font-size: 25px;
+    font-size: 20px;
     font-family: 'Raleway';
-    letter-spacing: 0px;
-    padding-left: 20px;
-    color: #0077ce;
-    margin-top: 25px;
-    text-transform: capitalize;
+    letter-spacing: 2px;
+    color: #171717;
+    text-transform: uppercase;
+    background: #eee;
+    margin: 0;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 12px #00000014;
+    font-weight: 600;
 }
 .alertthing label {
     display: block;
-    padding: 0px 20px;
+    padding: 0px 25px;
     letter-spacing: 1px;
     font-size: 13px;
     font-weight: 900;
@@ -2195,9 +2201,13 @@ section.mdulelm {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    padding: 7px 25px;
+    padding: 7px 15px;
     cursor: pointer;
     transition: .2s;
+    font-family: 'Raleway';
+    font-weight: 700;
+    border: 1px solid #0000001f;
+    border-radius: 25px;
 }
 .alertthing span:hover {
     background: rgba(0, 0, 0, 0.07);
@@ -3169,4 +3179,94 @@ section.tlselm {
     height: calc(100% - 30px);
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+
+
+
+.dialogwinEdit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    background: #eee;
+    box-shadow: 0px 2px 12px #000000e0;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 0;
+    transform: translate(-50%,0);
+    transform-origin: center;
+    transition: all 0.3s ease-in-out;
+}
+.dialogwinEdit_ {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    background: #eee;
+    box-shadow: 0px 2px 12px #000000e0;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 1;
+    transform: translate(-50%,-50%);
+    transform-origin: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.bigwrapEditron {
+    position: relative;
+}
+.bigwrapEditron h1 {
+    background: #fff;
+    margin: 0;
+    padding: 10px 25px;
+    color: #000;
+    font-family: 'Raleway';
+    font-weight: 600;
+    font-size: 20px;
+    box-shadow: 0px 2px 12px #0003;
+    margin-bottom: 20px;
+}
+.wrapEditron {
+    position: relative;
+    display: grid;
+    color: #000;
+    font-family: 'Raleway';
+    font-weight: 600;
+    padding: 0 25px;
+    grid-gap: 10px;
+    width: 300px;
+}
+.sgnsdiv_ {
+    display: grid;
+    grid-gap: 3px;
+    text-transform: capitalize;
+}
+.sgnsdiv_ select {
+    outline: none;
+    border: none;
+    box-shadow: 0px 2px 12px #0000001a;
+    font-family: 'Raleway';
+    font-weight: 600;
+    padding: 5px 2px;
+    text-transform: capitalize;
+}
+.oketron {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    color: #000;
+    font-family: 'Raleway';
+    font-weight: 700;
+    margin: 0 25px;
+    margin-top: 25px;
+    margin-bottom: 35px;
+    border: 1px solid #00000038;
+    padding: 10px;
+    border-radius: 15px;
+}
+.oketron:hover {
+    background: #00000014;
 }

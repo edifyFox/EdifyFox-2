@@ -1,14 +1,25 @@
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="../../../../node_modules/@pdftron/webviewer/webviewer.min.js"></script>
   </head>
 
   <body style="margin: 0; padding: 0;">
-    <div id="viewer">
 
+    <div class="frame">
+        <div class="nameapp" id="nmapp"></div>
+        <div class="descfn" id="dscfn"></div>
+        <div class="sd" id="close"></div>
+        <div class="sddd" id="maxi"></div>
+        <div class="sdd" id="mini"></div>
     </div>
 
+    <div id="viewer" class="wrapper"></div>
+
     <script>require('../src/App.js');</script>
-    
+    <script>const $ = require('jquery');</script>
+    <script>require('../../topBar.js');</script>
   </body>
 </html>

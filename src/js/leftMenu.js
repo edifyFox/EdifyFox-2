@@ -1,6 +1,7 @@
 $('#hme').click(function() {
     setWishPerTime();
     $('.mainone').css('backdrop-filter','unset');
+    $('.maintwo').css('backdrop-filter','unset');
     document.getElementById('anm2').className = 'firscard_';
     document.getElementById('crskhdmi').className = 'courses_';
     document.getElementById('anm3').className = 'tools_';
@@ -15,6 +16,7 @@ $('#hme').click(function() {
 
 $('#tls').click(function() {
     $('.mainone').css('backdrop-filter','unset');
+    $('.maintwo').css('backdrop-filter','unset');
     document.getElementById('anm2').className = 'firscard_';
     document.getElementById('crskhdmi').className = 'courses_';
     document.getElementById('ntfbar').className = 'notif_';
@@ -35,10 +37,12 @@ $('#prf').click(function() {
     document.getElementById('ntfbar').className = 'notif_';
     setTimeout(function() {
         $('.mainone').css('backdrop-filter','blur(2px)');
+        $('.maintwo').css('backdrop-filter','blur(2px)');
     }, 500);
 });
 $("#crs").click(function() {
     $('.mainone').css('backdrop-filter','unset');
+    $('.maintwo').css('backdrop-filter','unset');
     document.getElementById('ntfbar').className = 'notif_';
     if (document.getElementById('prf').className != 'sdvan oncsd') {
         document.getElementById('anm2').className = 'firscard_';

@@ -183,15 +183,18 @@
                         <div class="sgnsdiv">
                             <select class="birth" style="width: 100%;" id="branche" tabindex="-1">
                                     <option value="none">Choose</option>
-                                    <option value="CPI_API">CPI/API</option>
+                                    <option value="CPI">CPI</option>
+                                    <option value="API">API</option>
                                     <option value="TC3A">TC3A</option>
                                     <option value="TC4A">TC4A</option>
-                                    <option value="GC">GC</option>
+                                    <option value="GME">GME</option>
+                                    <option value="GMPFI">GMPFI</option>
+                                    <option value="GMIP">GMIP</option>
+                                    <option value="GECMI">GECMI</option>
+                                    <option value="IMASE">IMASE</option>
                                     <option value="GIP">GIP</option>
-                                    <option value="GM">GM</option>
-                                    <option value="EMSI">EMSI</option>
-                                    <option value="GTIER">GTIER</option>
-                                    <option value="IPP">IPP</option>
+                                    <option value="IADS">IADS</option>
+                                    <option value="CIVIL">CIVIL</option>
                             </select>
                         </div>
                 </div>
@@ -281,10 +284,10 @@
                     <div class="smdl3iba">to do list</div>
                     <div id="hms2" class="dvl3iba"></div>
                 </div>
-                <div id="hmes3" class="smn2it">
+                <!-- <div id="hmes3" class="smn2it">
                     <div class="smdl3iba">schedule</div>
                     <div id="hms3" class="dvl3iba"></div>
-                </div>
+                </div> -->
                 <div id="hmes4" class="smn2it">
                     <div class="smdl3iba">weather</div>
                     <div id="hms4" class="dvl3iba"></div> 
@@ -464,7 +467,7 @@
                     <div class="submnstatus2">
                         <div class="subsubstat">
                             <div id="prfcrdgnd" class="submnval"></div>
-                            <div class="submnlbl">gender</div>
+                            <div class="submnlbl">Branche</div>
                         </div>
                         <div class="subsubstat">
                             <div id="prfcrdage" class="submnval"></div>
@@ -504,65 +507,9 @@
                         <div class="sbsbpass">
                             <div id="prfcrdpwd" class="passcd"></div>
                         </div>
-                        <div id="editthings1" class="inputat">
-                            <input type="password" class="inptxt" id="pwded1" placeholder="Old password">
-                            <input type="password" class="inptxt" id="pwded2" placeholder="New PassWord minimum 8 character">
-                        </div>
-                        <div id="editthings2" class="inputatmn">
-                                <div class="sgnsdiv">
-                                    <select class="birth" style="width: 100%;" id="mustawa_" tabindex="-1">
-                                        <option value="none">School Level</option>
-                                        <option value="1">1st Year</option>
-                                        <option value="2">2nd Year</option>
-                                        <option disabled value="3">3rd Year</option>
-                                        <option disabled value="4">4th Year</option>
-                                        <option disabled value="5">5th Year</option>
-                                    </select>
-                                </div>
-                                <div class="sgnsdiv">
-                                    <select class="birth" style="width: 100%;" id="sec_" tabindex="-1">
-                                            <option value="none">Section</option>
-                                            <option value="1" disabled class="fo12">SEC 1</option>
-                                            <option value="2" disabled class="fo12">SEC 2</option>
-                                            <option value="3" disabled class="fo12345">SEC 3</option>
-                                            <option value="4" disabled class="fo12345">SEC 4</option>
-                                            <option value="5" disabled class="fo12345">SEC 5</option>
-                                    </select>
-                                </div>
-                                <div class="sgnsdiv">
-                                    <select class="birth" style="width: 100%;" id="grp_" tabindex="-1">
-                                            <option value="none">Groupe</option>
-                                            <option value="11" disabled class="fosec1">G11</option>
-                                            <option value="12" disabled class="fosec1">G12</option>
-                                            <option value="13" disabled class="fosec1">G13</option>
-                                            <option value="14" disabled class="fosec1">G14</option>
-                                            <option value="15" disabled class="fosec1">G15</option>
-    
-                                            <option value="21" disabled class="fosec2">G21</option>
-                                            <option value="22" disabled class="fosec2">G22</option>
-                                            <option value="23" disabled class="fosec2">G23</option>
-                                            <option value="24" disabled class="fosec2">G24</option>
-                                            <option value="25" disabled class="fosec2">G25</option>
-    
-                                            <option value="1" disabled class="fosec3">G1</option>
-                                            <option value="2" disabled class="fosec3">G2</option>
-                                            <option value="3" disabled class="fosec3">G3</option>
-                                            <option value="4" disabled class="fosec3">G4</option>
-                                            <option value="5" disabled class="fosec3">G5</option>
-                                    </select>
-                                </div>
-                                <div class="sgnsdiv" >
-                                        <select class="birth" style="width: 100%;" id="sgrp_" tabindex="-1">
-                                                <option value="none">S-groupe</option>
-                                                <option value="1">SG-1</option>
-                                                <option value="2">SG-2</option>
-                                                <option disabled value="sg3">SG 3</option>
-                                        </select>
-                                </div>
-                        </div>
                     </div>
                     <div id="editPrflp" class="buteditt">Edit your stats</div>
-                    <div id="deletAcc" class="butedittt">Delete Account</div>
+                    <!-- <div id="deletAcc" class="butedittt">Delete Account</div> -->
                 </div>
             </div>
         </div>
@@ -581,6 +528,7 @@
         <span>ok</span>
     </div>
     <div id="hanadl" class="dialogwin"></div>
+    <div id="wrapEdits" class="dialogwinEdit"></div>
 </div>
 
 

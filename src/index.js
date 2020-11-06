@@ -27,8 +27,8 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 1050,
+    height: 620,
     minHeight: 600,
     minWidth : 1000,
     title: "EdifyFox",
@@ -51,7 +51,7 @@ function createWindow() {
   );
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -92,7 +92,7 @@ app.on('activate', () => {
 
 
 //-------------------------------------------------------------------
-// Auto updates
+//                        Auto updates
 //-------------------------------------------------------------------
 const sendStatusToWindow = (text) => {
   log.info(text);
@@ -123,5 +123,7 @@ autoUpdater.on('update-downloaded', info => {
   // Wait 5 seconds, then quit and install
   // In your application, you don't need to wait 500 ms.
   // You could call autoUpdater.quitAndInstall(); immediately
-  autoUpdater.quitAndInstall();
+  setTimeout(() => {
+    autoUpdater.quitAndInstall();
+  }, 500);
 });
