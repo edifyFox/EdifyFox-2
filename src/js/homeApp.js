@@ -53,7 +53,7 @@ $('#hmes1').click(function() {
     $('.txndor').css('opacity','1');
     document.getElementById('hms1').className = 'dvl3iba opa1';
     document.getElementById('hms2').className = 'dvl3iba';
-    document.getElementById('hms3').className = 'dvl3iba';
+    // document.getElementById('hms3').className = 'dvl3iba';
     document.getElementById('hms4').className = 'dvl3iba';
 });
 
@@ -66,22 +66,22 @@ $('#hmes2').click(function() {
     $('#amm4').css('transform','translateY(100vw)');
     document.getElementById('hms1').className = 'dvl3iba';
     document.getElementById('hms2').className = 'dvl3iba opa1';
-    document.getElementById('hms3').className = 'dvl3iba';
+    // document.getElementById('hms3').className = 'dvl3iba';
     document.getElementById('hms4').className = 'dvl3iba';
 });
 
-$('#hmes3').click(function() {
-    animdtb();
-    $('#amm1').css('transform','translateY(100vw)');
-    $('#amm2').css('transform','translateY(100vw)');
-    $('#amm3').css('transform','translateY(0)');
-    $('#amm4').css('transform','translateY(100vw)');
-    $('.txndor').css('opacity','0');
-    document.getElementById('hms1').className = 'dvl3iba';
-    document.getElementById('hms2').className = 'dvl3iba';
-    document.getElementById('hms3').className = 'dvl3iba opa1';
-    document.getElementById('hms4').className = 'dvl3iba';
-});
+// $('#hmes3').click(function() {
+//     animdtb();
+//     $('#amm1').css('transform','translateY(100vw)');
+//     $('#amm2').css('transform','translateY(100vw)');
+//     $('#amm3').css('transform','translateY(0)');
+//     $('#amm4').css('transform','translateY(100vw)');
+//     $('.txndor').css('opacity','0');
+//     document.getElementById('hms1').className = 'dvl3iba';
+//     document.getElementById('hms2').className = 'dvl3iba';
+//     document.getElementById('hms3').className = 'dvl3iba opa1';
+//     document.getElementById('hms4').className = 'dvl3iba';
+// });
 
 $('#hmes4').click(function() {
     animdtb();
@@ -91,6 +91,6 @@ $('#hmes4').click(function() {
     $('#amm4').css('transform','translateY(100vw)');
     document.getElementById('hms1').className = 'dvl3iba';
     document.getElementById('hms2').className = 'dvl3iba';
-    document.getElementById('hms3').className = 'dvl3iba';
+    // document.getElementById('hms3').className = 'dvl3iba';
     document.getElementById('hms4').className = 'dvl3iba opa1';
 });

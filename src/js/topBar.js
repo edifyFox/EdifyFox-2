@@ -4,24 +4,15 @@ let win = remote.getCurrentWindow();
 const newsId = document.getElementById("dscfn");
 let OSName="Unknown OS";
 
-let keyNewsDIV = document.createElement("DIV"),
-	descNewsDIV = document.createElement("DIV");
 
-keyNewsDIV.innerHTML = "News";
-keyNewsDIV.setAttribute("class", "keyNLb");
-
-descNewsDIV.innerHTML = "AYOUR Bomber Jacket Availble On ayourclothing.com";
-descNewsDIV.setAttribute("class", "descNLb");
-descNewsDIV.addEventListener("click",() => {
-  var link = "http://ayourclothing.com/";
-  const {shell} = require('electron');
-  shell.openExternal(link);
+$.ajax({
+  type: "POST",
+  url: "https://edifyfox.com/php/ads.php",
+  success: (data, statuts) => {
+      newsId.innerHTML = data;
+  },
+  dataType: 'text'
 });
-
-if (true) {
-	newsId.appendChild(keyNewsDIV);
- 	newsId.appendChild(descNewsDIV);
-}
 
 
 if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
@@ -30,7 +21,7 @@ if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
 if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
 
 if(OSName=="MacOS"){
-    document.getElementById('nmapp').className = 'nameappmac';
+    document.getElementById('nmapp').style.display = 'none';
     document.getElementById('close').className = 'sdmac';
     document.getElementById('maxi').className = 'sdddmac';
     document.getElementById('mini').className = 'sddmac';

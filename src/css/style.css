@@ -77,6 +77,13 @@ body {
     font-weight: 600;
     color: #ffffff7a;
 }
+img.edifyappname {
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    object-fit: contain;
+    filter: contrast(0.5);
+}
 
 .descfn {
     position: absolute;
@@ -279,11 +286,11 @@ a:visited {
 
 .wrapload img {
     position: relative;
-    width: 30vw;
-    height: 30vw;
+    width: 40vw;
+    height: 40vw;
     object-fit: contain;
-    filter: opacity(0.2);
     pointer-events: none;
+    opacity: .7;
 }
 
 
