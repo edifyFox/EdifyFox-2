@@ -71,14 +71,14 @@ function displayWeather(){
     sunriseyvar.innerHTML = unixDATE(weather.sunrise);
     sunsetvar.innerHTML = unixDATE(weather.sunset);
 
-    var crnttime = new Date().getHours();
-    var crnsunrise = new Date(weather.sunrise*1000);
-    var crnsunset = new Date(weather.sunset*1000);
-    if (crnttime > crnsunrise.getHours() && crnttime < crnsunset.getHours()) {
-        $('.animwth').css('background','url(img/mknes.jpg) no-repeat center center / cover');
-    } else {
-        $('.animwth').css('background','url(img/mknesn.jpg) no-repeat center center / cover');
-    }
+    // var crnttime = new Date().getHours();
+    // var crnsunrise = new Date(weather.sunrise*1000);
+    // var crnsunset = new Date(weather.sunset*1000);
+    // if (crnttime > crnsunrise.getHours() && crnttime < crnsunset.getHours()) {
+    //     $('.animwth').css('background','url(img/mknes.jpg) no-repeat center center / cover');
+    // } else {
+    //     $('.animwth').css('background','url(img/mknesn.jpg) no-repeat center center / cover');
+    // }
 
 }
 

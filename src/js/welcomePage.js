@@ -1,5 +1,10 @@
 const { parseHTML } = require("jquery");
 
+var wlcB = ["img/wlcB1.jpg","img/wlcB2.jpg","img/wlcB3.jpg"];
+var frameB = $('#strtitm1')[0];
+$(frameB).css('background',`url(${wlcB[Math.floor(Math.random() * wlcB.length)]}) no-repeat center center`);
+$(frameB).css('background-size','cover');
+
 var firstName = $("#frstnm")[0];
 var lastName = $("#scdnm")[0];
 var email = $("#mailchk")[0];
@@ -194,3 +199,5 @@ $("#grp").change(function() {
 $("#sgrp").change(function() {
     checkSelect(this);
 });
+
+

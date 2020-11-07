@@ -64,6 +64,7 @@ $('#hmes2').click(function() {
     $('#amm2').css('transform','translateY(0)');
     $('#amm3').css('transform','translateY(100vw)');
     $('#amm4').css('transform','translateY(100vw)');
+    $('.txndor').css('opacity', '1');
     document.getElementById('hms1').className = 'dvl3iba';
     document.getElementById('hms2').className = 'dvl3iba opa1';
     // document.getElementById('hms3').className = 'dvl3iba';
@@ -89,6 +90,7 @@ $('#hmes4').click(function() {
     $('#amm2').css('transform','translateY(100vw)');
     $('#amm3').css('transform','translateY(100vw)');
     $('#amm4').css('transform','translateY(100vw)');
+    $('.txndor').css('opacity', '0');
     document.getElementById('hms1').className = 'dvl3iba';
     document.getElementById('hms2').className = 'dvl3iba';
     // document.getElementById('hms3').className = 'dvl3iba';
