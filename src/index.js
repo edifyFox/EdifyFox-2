@@ -101,21 +101,21 @@ const sendStatusToWindow = (text) => {
   }
 };
 
-autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
-});
+// autoUpdater.on('checking-for-update', () => {
+//   sendStatusToWindow('Checking for update...');
+// });
 autoUpdater.on('update-available', info => {
   sendStatusToWindow('Update available.');
 });
-autoUpdater.on('update-not-available', info => {
-  sendStatusToWindow('Update not available.');
-});
+// autoUpdater.on('update-not-available', info => {
+//   sendStatusToWindow('Update not available.');
+// });
 autoUpdater.on('error', err => {
   sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
 });
 autoUpdater.on('download-progress', progressObj => {
   sendStatusToWindow(
-    `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+    `Download speed: ${progressObj.bytesPerSecond.toFixed(2)} - Downloaded ${progressObj.percent.toFixed(2)}% (${progressObj.transferred.toFixed(2)} + '/' + ${progressObj.total.toFixed(2)} + )`
   );
 });
 autoUpdater.on('update-downloaded', info => {
