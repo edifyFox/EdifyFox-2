@@ -337,6 +337,7 @@ $('#nws').click(function() {
     if (user.session) {
         $.post("https://edifyfox.com/php/notifupdate.php", {
             sclvl : user.sclevel,
+            branche: user.branche,
             sclsec : user.sec,
             sclgrp : user.grp,
             scSgrp : user.sgrp,
@@ -359,6 +360,7 @@ $('.wrapper').click(function() {
         if (user.session) {
             $.post("https://edifyfox.com/php/notifupdate.php", {
                 sclvl : user.sclevel,
+                branche: user.branche,
                 sclsec : user.sec,
                 sclgrp : user.grp,
                 scSgrp : user.sgrp,
@@ -389,6 +391,7 @@ function loadnotif() {
             data: {
                 option : start,
                 sclvl : user.sclevel,
+                branche: user.branche,
                 sclsec : user.sec,
                 sclgrp : user.grp,
                 scSgrp : user.sgrp,

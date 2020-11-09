@@ -1,7 +1,7 @@
 {
   "name": "edifyfox",
   "productName": "EdifyFox",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Version two of the edifyfox app for ENSAM students",
   "repository": "git@github.com:edifyFox/EdifyFox-2.git",
   "main": "src/index.js",
