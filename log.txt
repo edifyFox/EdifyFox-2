@@ -1,0 +1,20 @@
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/assets/app-icon/win/app.ico"
+    },
+    "nsis": {
+      "installerIcon": "src/assets/app-icon/win/app.ico",
+      "uninstallerIcon": "src/assets/app-icon/win/app.ico",
+      "uninstallDisplayName": "EdifyFox",
+      "license": "LICENCE.txt",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+
+    "mac": {
+      "category": "public.app-category.education",
+      "target": "dmg",
+      "icon": "src/assets/app-icon/mac/app.icns",
+      "entitlements": "src/assets/mac/info.plist"
+    }
