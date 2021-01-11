@@ -12,15 +12,24 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
     "build-installer": "electron-builder"
-    
   },
   "build": {
-    "appId": "edifyfox",
-    "mac": {
-      "category": "public.app-category.education",
-      "target": "dmg",
-      "icon": "src/assets/app-icon/mac/app.icns",
-      "entitlements": "src/assets/mac/info.plist"
+    "appId": "com.electron.edifyfox",
+    "productName": "edifyfox",
+    "copyright": "Copyright © 2021 GilgameshProduction",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/assets/app-icon/win/app.ico"
+    },
+    "nsis": {
+      "installerIcon": "src/assets/app-icon/win/app.ico",
+      "uninstallerIcon": "src/assets/app-icon/win/app.ico",
+      "uninstallDisplayName": "EdifyFox",
+      "license": "LICENCE.txt",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   },
   "keywords": [],

@@ -101,6 +101,7 @@ const sendStatusToWindow = (text) => {
   }
 };
 
+
 // autoUpdater.on('checking-for-update', () => {
 //   sendStatusToWindow('Checking for update...');
 // });
@@ -115,11 +116,11 @@ autoUpdater.on('error', err => {
 });
 autoUpdater.on('download-progress', progressObj => {
   sendStatusToWindow(
-    `Download speed: ${progressObj.bytesPerSecond.toFixed(2)} - Downloaded ${progressObj.percent.toFixed(2)}% (${progressObj.transferred.toFixed(2)} + '/' + ${progressObj.total.toFixed(2)} + )`
+    `Downloaded ${progressObj.percent.toFixed(2)}%`
   );
 });
 autoUpdater.on('update-downloaded', info => {
-  sendStatusToWindow('Update downloaded; will install now');
+  sendStatusToWindow('Update downloaded, will install now');
   // Wait 5 seconds, then quit and install
   // In your application, you don't need to wait 500 ms.
   // You could call autoUpdater.quitAndInstall(); immediately
