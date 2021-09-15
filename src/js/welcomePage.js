@@ -13,17 +13,14 @@ var passcodec = $("#pwdc")[0];
 var dayB = $("#jour")[0];
 var monthB = $("#mois")[0];
 var yearB = $("#annee")[0];
-var levelS = $("#mustawa")[0];
-var filliere = $("#branche")[0];
-var section = $("#sec")[0];
-var groupe = $("#grp")[0];
-var sgroupe = $("#sgrp")[0];
+var gender = $("#gender")[0];
+
 var inputLists = {
     text : [firstName,lastName],
     mail : [email],
     pwd : [passcode],
     pwdc : [passcodec],
-    select : [dayB,monthB,yearB,levelS,filliere,section,groupe,sgroupe]
+    select : [dayB,monthB,yearB,gender]
 };
 
 
@@ -102,20 +99,17 @@ $("#cnfsignup").on('click',function() {
         alertada();
         $.ajax({
             type: "POST",
-            url: "https://edifyfox.com/php/insertdata.php",
+            url: "http://localhost/PROJECTFILEPHP/php/loginsAndSignUps/signUpAcc.php",
             data: {
                 firstname: firstName.value,
                 lastname: lastName.value,
                 email: email.value,
                 pass: passcode.value,
                 ddn: `${dayB.value}/${monthB.value}/${yearB.value}`,
-                sclevel: levelS.value,
-                branche: filliere.value,
-                sec: section.value,
-                grp: groupe.value,
-                sgrp: sgroupe.value
+                gender: gender.value
             },
             success: (data, statuts) => {
+                console.log(data);
                 if (data == "done") {
                     $('#nmusr')[0].value = email.value;
                     $('#pscod')[0].value = passcode.value;
@@ -180,24 +174,8 @@ $("#annee").change(function () {
     checkSelect(this);
 });
 
-$("#mustawa").change(function() {
+$("#gender").change(function() {
     checkSelect(this);
 }); 
-
-$("#branche").change(function() {
-    checkSelect(this);
-}); 
-
-$("#sec").change(function() {
-    checkSelect(this);
-});  
-
-$("#grp").change(function() {
-    checkSelect(this);
-});
-
-$("#sgrp").change(function() {
-    checkSelect(this);
-});
 
 

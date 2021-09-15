@@ -1,9 +1,12 @@
+// import { User,Student,Laureat } from './logger';
+
 const $ = require('jquery');
 const { ipcRenderer } = require('electron');
 const { BrowserWindow } = require('electron').remote;
 const url = require('url');
 const path = require('path');
-const User = require(path.join(__dirname, 'js/logger.js'));
+const {User,Student,Laureat} = require(path.join(__dirname, 'js/logger.js'));
+
 
 // INITIATE USER
 var user = new User();
@@ -52,12 +55,10 @@ function alertada(msg) {
     }, 300);
 }
 $('.bcblak').click(function() {
-    if (!user.modification && document.getElementById('wrapEdits').className == 'dialogwinEdit_') {
-        document.getElementById('wrapEdits').className = "dialogwinEdit_ shakeit";
-        setTimeout(function() { 
-            document.getElementById('wrapEdits').className = "dialogwinEdit_";
-        }, 500);
-    } else {
+    if (document.getElementById('wrapEdits').className == 'dialogwinEdit_' && !user.sObj.modification && !notConnectedBool) {
+        console.log('You must complete sign up first ...');
+    }
+    else {
         alertadaT = false;
         document.getElementById('hanadl').className = 'dialogwin';
         document.getElementById('wrapEdits').className = 'dialogwinEdit';
@@ -79,20 +80,28 @@ $('#alertada span').click(function() {
 
 //OFFLINE ALLERT
 var notConnectedBool = true;
+var triedToConnectedBool = false;
 setInterval(function(){
     if(!navigator.onLine) {alertada('You are Offline')}
-    if(navigator.onLine && notConnectedBool) autoLogin();
+    if(navigator.onLine && notConnectedBool && !triedToConnectedBool) {
+        $('#alertada').css('opacity','0');
+        $('#alertada').css('pointer-events','none');
+        setTimeout(function() { 
+            $('.dialogwrap').css('opacity', '0');
+        }, 100);
+        setTimeout(function() { 
+            $('.dialogwrap').css('display', 'none');
+            autoLogin();
+        }, 300);
+    }
 }, 1000);
 
-if(navigator.onLine) {
-    autoLogin()
-}
 
-
-
+//LOGINS
 
 function loginSuccess() {
-    if(user.session){
+    if(user.session && user.sObj != null) {
+        notConnectedBool = false;
         setSessionData('login');
         setWishPerTime();
         mdularaya();
@@ -110,14 +119,34 @@ function loginSuccess() {
         setTimeout(function() { 
             document.getElementById('itm2').className = 'animtwo';
         }, 1900);
-        setTimeout(function() { 
-            document.getElementById('itm3').className = 'sdmn';
-            $('.wrapper').css('opacity', '1');
-            if (!user.modification) editron(1);
-        }, 2400);
+        if (!user.sObj.modification) {
+            setTimeout(function() {
+                editron(1);
+            }, 2500);
+        } else {
+            setTimeout(function() { 
+                document.getElementById('itm3').className = 'sdmn';
+                $('.wrapper').css('opacity', '1');
+            }, 2500);
+        }
         $("#signupFORM")[0].reset();
         $("#signinFORM")[0].reset();
         console.log('Welcome');
+    } else {
+        notConnectedBool = false;
+        $('.mrbnvz2').css('display', 'block');
+        setTimeout(function() { 
+            $('.bcblak').click();
+            document.getElementById('itm1').className = 'animone';
+        }, 1500);
+        setTimeout(function() { 
+            document.getElementById('itm2').className = 'animtwo';
+        }, 1900);
+        setTimeout(function() {
+            editron(2);
+        }, 2500);
+        $("#signupFORM")[0].reset();
+        $("#signinFORM")[0].reset();
     }
 }
 
@@ -138,14 +167,14 @@ function setWishPerTime() {
 }
 
 function prf3mer() {
-    if (user.session) {
-        document.getElementById("prfcrdstt").innerHTML = user.getLevel();
-        document.getElementById("prfcrdgnd").innerHTML = user.branche;
+    if (user.session && user.accType == "student") {
+        document.getElementById("prfcrdstt").innerHTML = user.sObj.getLevel();
+        document.getElementById("prfcrdgnd").innerHTML = user.sObj.branche;
         document.getElementById("prfcrdage").innerHTML = user.getAge();
         document.getElementById("prfcrdddn").innerHTML = user.getBirthday();
-        document.getElementById("prfcrdsec").innerHTML = "sec-" + user.sec;
-        document.getElementById("prfcrdgrp").innerHTML = "G-" + user.grp;
-        document.getElementById("prfcrdsgp").innerHTML = "SG-" + user.sgrp;
+        document.getElementById("prfcrdsec").innerHTML = "sec-" + user.sObj.sec;
+        document.getElementById("prfcrdgrp").innerHTML = "G-" + user.sObj.grp;
+        document.getElementById("prfcrdsgp").innerHTML = "SG-" + user.sObj.sgrp;
         document.getElementById("prfcrdddc").innerHTML = user.getSubsDay();
         document.getElementById("prfcrdnam").innerHTML = user.getName();
         document.getElementById("prfcrdema").innerHTML = user.email;
@@ -155,10 +184,10 @@ function prf3mer() {
 }
 
 function autoLogin() {
-    notConnectedBool = false;
     const customer = JSON.parse(localStorage.getItem('chkedlgn'));
     if (!customer) {
         console.log('You must connect');
+        triedToConnectedBool = true;
         setTimeout(function() { 
             document.getElementById('bnzr').className = 'bnvz1_';
         }, 1500);
@@ -193,7 +222,6 @@ function yahlogin() {
             console.log(err);
             alertada(err);
         } else {
-            console.log("user session: " + result);
             if(result) {
                 loginSuccess();
             } else {
@@ -252,66 +280,18 @@ function setSessionData(operation) {
     formdata.append("idUsr", user.id);
     formdata.append("operation",operation);
     formdata.append("sessionid", user.getSessionId());
+    formdata.append("platform", navigator.platform);
+    formdata.append("platformDetail", navigator.appVersion);
     var ajax = new XMLHttpRequest();
     ajax.addEventListener("load", (event) => {
         if(operation == "login") user.setSessionId(parseInt(event.target.response));
     });
-    ajax.open("POST", "https://edifyfox.com/php/setSessionData.php");
+    ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/loginsAndSignUps/setSessionData.php");
     ajax.send(formdata);
 }
 
+//EDITRONAT
 
-// editPrflp
-document.getElementById('editPrflp').addEventListener('click', () => {
-    editron(0);
-});
-
-function checkSelectEdits(elm) {
-    if (elm.value != 'none') {
-        goodInput(elm);
-        return true
-    } else {
-        badInput(elm);
-        return false
-    }
-}
-function submitEditron() {
-    var checked = true;
-    var editLevel = $("#editLevel")[0];
-    var editBranche = $("#editBranche")[0];
-    var editSec = $("#editSec")[0];
-    var editGrp = $("#editGrp")[0];
-    var editSgrp = $("#editSgrp")[0];
-    var inputListsEdit = [editLevel,editBranche,editSec,editGrp,editSgrp];
-    inputListsEdit.forEach(element => {
-        checked = checkSelectEdits(element) ? checked : false;
-    });
-    if (checked) {
-        document.getElementById('wrapEdits').className = 'dialogwinEdit';
-        $.ajax({
-            type: "POST",
-            url: "https://edifyfox.com/php/editthingss.php",
-            data: {
-                idUsr: user.id,
-                editLevel: editLevel.value,
-                editBranche: editBranche.value,
-                editSec: editSec.value,
-                editGrp: editGrp.value,
-                editSgrp: editSgrp.value
-            },
-            success: (data, statuts) => {
-                if (data == "YESS") {
-                    document.getElementById('nmusr').value = user.email;
-                    document.getElementById('chkedbox').checked = true;
-                    $("#formEDITION")[0].reset();
-                    alertada('Cool your info has been updated now please login and enjoy studying :)')
-                    $('#lgout').click();
-                }
-            },
-            dataType: 'text'
-        });
-    }
-}
 function editron(msg) {
     if (user.session) {
         alertada();
@@ -321,26 +301,64 @@ function editron(msg) {
         var ajax = new XMLHttpRequest();
         ajax.addEventListener("load", function(event) {
             document.getElementById('wrapEdits').innerHTML = event.target.response;
-            setTimeout(function() {
+            setTimeout(function() { 
                 document.getElementById('wrapEdits').className = 'dialogwinEdit_';
-            }, 300);
+            }, 200);
         }, false);
-        ajax.open("POST", "https://edifyfox.com/php/editThings.php");
+        ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/loginsAndSignUps/editStatus.php");
         ajax.send(formdata);
     }
 }
+
+function finishTmlg() {
+    if (user.sObj == null) timeLineData.append("isNewAccount", 1);
+    var ajax = new XMLHttpRequest();
+    ajax.addEventListener("load", function(event) {
+        if (event.target.response == "YESS") {
+            if (user.sObj != null) user.sObj.modification = true;
+            timeLineData.delete("idUsr");
+            timeLineData.delete("accType");
+            timeLineData.delete("isNewAccount");
+            timeLineData.delete("schoolId");
+            timeLineData.delete("year");
+            timeLineData.delete("branchId");
+            timeLineData.delete("section");
+            timeLineData.delete("grp");
+            timeLineData.delete("sgrp");
+            document.getElementById('wrapEdits').className = 'dialogwinEdit';
+            document.getElementById('nmusr').value = user.email;
+            document.getElementById('chkedbox').checked = true;
+            setTimeout(function() {
+                alertada('Your data has been successfully saved.\nNow please login and Enjoy studying with edifyfox:)');
+                document.getElementById('wrapEdits').innerHTML = '';
+                $('#lgout').click();
+                for(var pair of timeLineData.entries()) {
+                    console.log(pair);
+                }
+            }, 1000);
+        }
+    }, false);
+    ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/loginsAndSignUps/setUpAcc.php");
+    ajax.send(timeLineData);
+}
+
+$('#editPrflp').click(function() {
+    editron(0);
+});
+
+
 
 
 //NOTIF APP
 
 $('#nws').click(function() {
     if (user.session) {
-        $.post("https://edifyfox.com/php/notifupdate.php", {
+        $.post("http://localhost/PROJECTFILEPHP/php/notifupdate.php", {
             sclvl : user.sclevel,
-            branche: user.branche,
-            sclsec : user.sec,
-            sclgrp : user.grp,
-            scSgrp : user.sgrp,
+            branche: user.sObj.branche,
+            sclsec : user.sObj.sec,
+            sclgrp : user.sObj.grp,
+            scSgrp : user.sObj.sgrp,
             sesID : user.id
         }, function(result){
             console.log(result);
@@ -358,12 +376,12 @@ $('.wrapper').click(function() {
         $('.edwe').css('backdrop-filter','unset');
         document.getElementById('ntfbar').className = 'notif_';
         if (user.session) {
-            $.post("https://edifyfox.com/php/notifupdate.php", {
+            $.post("http://localhost/PROJECTFILEPHP/php/notifupdate.php", {
                 sclvl : user.sclevel,
-                branche: user.branche,
-                sclsec : user.sec,
-                sclgrp : user.grp,
-                scSgrp : user.sgrp,
+                branche: user.sObj.branche,
+                sclsec : user.sObj.sec,
+                sclgrp : user.sObj.grp,
+                scSgrp : user.sObj.sgrp,
                 sesID : user.id
             }, function(result){
                 console.log(result);
@@ -386,15 +404,15 @@ $('#ajtcbzf').click(function() {
 function loadnotif() {
     if (user.session && navigator.onLine) {
         $.ajax({
-            url: 'https://edifyfox.com/php/notifreader.php',
+            url: 'http://localhost/PROJECTFILEPHP/php/notifreader.php',
             method: 'POST',
             data: {
                 option : start,
                 sclvl : user.sclevel,
-                branche: user.branche,
-                sclsec : user.sec,
-                sclgrp : user.grp,
-                scSgrp : user.sgrp,
+                branche: user.sObj.branche,
+                sclsec : user.sObj.sec,
+                sclgrp : user.sObj.grp,
+                scSgrp : user.sObj.sgrp,
                 sesID : user.id
             },
             dataType: 'json',
@@ -428,7 +446,7 @@ function mdularaya(selectBox) {
     if (user.session) {
         var formdata = new FormData();
         formdata.append("sm1", user.sclevel);
-        formdata.append("branche", user.branche);
+        formdata.append("branche", user.sObj.branche);
         if (selectBox) {
             alertada();
             formdata.append("selectBox", selectBox);
@@ -438,7 +456,7 @@ function mdularaya(selectBox) {
             document.getElementById('crskhdmi').innerHTML = event.target.response;
             if (selectBox) $('.bcblak').click();
         }, false);
-        ajax.open("POST", "https://edifyfox.com/php/modulesreader.php");
+        ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/modulesreader.php");
         ajax.send(formdata);
     }
 }
@@ -456,7 +474,7 @@ function getcourse(evt) {
             document.getElementById('hanadl').className = 'dialogwin_';
         }, 300);
     }, false);
-    ajax.open("POST", "https://edifyfox.com/php/elemtreader.php");
+    ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/elemtreader.php");
     ajax.send(formdata);
 }
 
@@ -474,7 +492,7 @@ function getelyout(evtt) {
         $('.bcblak').click();
         document.getElementById('lyoutkhdmi').className = 'elyout';
     }, false);
-    ajax.open("POST", "https://edifyfox.com/php/lyoutreader.php");
+    ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/lyoutreader.php");
     ajax.send(data_post);
 }
 
@@ -565,7 +583,7 @@ $("#file1").change(function() {
                 reader.readAsDataURL(file);
                 $('#prcentLabel').html(`edit`);
             }, false);
-            ajax.open("POST", "https://edifyfox.com/php/insertPicPrfl.php");
+            ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/insertPicPrfl.php");
             ajax.send(formdata);
         } 
     }

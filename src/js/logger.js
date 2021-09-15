@@ -1,23 +1,37 @@
+monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+function ordinal_suffix_of(i) {
+	let j = i % 10;
+	let k = i % 100;
+	if (j == 1 && k != 11) {
+		return i+"st";
+	}
+	if (j == 2 && k != 12) {
+		return i+"nd";
+	}
+	if (j == 3 && k != 13) {
+		return i+"rd";
+	}
+	return i+"th";
+}
+
 class User {
-	monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	constructor() {
+		console.log('Iniating ...');
 		this.id = '';
 		this.firstname = '';
 		this.lastname = '';
 		this.email = '';
 		this.pwd = '';
 		this.ddn = '';
-		this.sclevel = '';
-		this.branche = '';
-		this.sec = '';
-		this.grp = '';
-		this.sgrp = '';
-		this.ddc = '';
+		this.gender = '';
+		this.country = '';
+		this.verified = false;
 		this.imgSrc = '';
-		this.adresse = '';
+		this.ddc = '';
+		this.accType = '';
 		this.sessionid = '';
 		this.session = false;
-		this.modification = false;
+		this.sObj = null;
 	}
 	getName() {
 		return `${this.firstname} ${this.lastname}`;
@@ -30,33 +44,11 @@ class User {
 	}
 	getBirthday() {
 		let dDate = new Date(this.ddn);
-		return `${dDate.getDate()} ${this.monthNames[dDate.getMonth()]} ${dDate.getFullYear()}`;
+		return `${dDate.getDate()} ${monthNames[dDate.getMonth()]} ${dDate.getFullYear()}`;
 	}
 	getSubsDay() {
 		let cDate = new Date(this.ddc);
-		return `${this.monthNames[cDate.getMonth()]} ${cDate.getFullYear()}`;
-	}
-	getLevel() {
-		switch (parseInt(this.sclevel)) {
-			case 1:
-				return "1st year student";
-				break;
-			case 2:
-				return "2nd year student";
-				break;
-			case 3:
-				return "3rd year student";
-				break;
-			case 4:
-				return "4th year student";
-				break;
-			case 5:
-				return "5th year student";
-				break;			
-			default:
-				return "student";
-				break;
-		}
+		return `${monthNames[cDate.getMonth()]} ${cDate.getFullYear()}`;
 	}
 	getPdp() {
 		if (this.imgSrc != "") {
@@ -86,6 +78,11 @@ class User {
 				this.logout();
 				console.log(root.msg);
 				callBack("Email Verification is required.\n An email was sent to you please check your primary inbox or Junk emails",null);
+			}
+			else if (root.id == "other") {
+				this.logout();
+				console.log(root.msg);
+				callBack(root.msg,null);
 			} else {
 				this.authenticate(root);
 				if (checked) {
@@ -96,7 +93,7 @@ class User {
 				callBack(null,this.session);
 			}
 		}, true);
-		ajax.open("POST", "https://edifyfox.com/php/chkedlogin.php");
+		ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/loginsAndSignUps/logger.php");
 		ajax.send(formdata);
 	}
 	authenticate(root) {
@@ -104,18 +101,17 @@ class User {
 		this.firstname = root.firstname;
 		this.lastname = root.lastname;
 		this.email = root.email;
-		this.pwd = root.pwd;
+		this.pwd = root.pwd;	
 		this.ddn = root.ddn;
-		this.sclevel = root.sclevel;
-		this.branche = root.branche;
-		this.sec = root.sec;
-		this.grp = root.grp;
-		this.sgrp = root.sgrp;
+		this.gender = root.gender;
+		this.country = root.country;
+		this.verified = (root.verified == "1") ? true : false;
 		this.ddc = root.ddc;
-		this.imgSrc = root.ip;
-		this.adresse = root.adresse;
+		this.imgSrc = root.imgSrc;
 		this.session = true;
-		this.modification = (root.modification == "1") ? true : false;
+		this.accType = root.type;
+		if (root.type == "student") this.sObj = new Student(root);
+		else if (root.type == "laureate") this.sObj = new Laureat(root);
 	}
 	logout() {
 		console.log('Logout ...');
@@ -125,20 +121,40 @@ class User {
 		this.email = '';
 		this.pwd = '';
 		this.ddn = '';
-		this.sclevel = '';
-		this.branche = '';
-		this.sec = '';
-		this.grp = '';
-		this.sgrp = '';
+		this.gender = '';
+		this.country = '';
+		this.verified = false;
 		this.ddc = '';
 		this.imgSrc = '';
-		this.adresse = '';
 		this.sessionid = '';
+		this.accType = '';
 		this.session = false;
-		this.modification = false;
+		this.sObj = null;
 		console.log('see you later ...');
 	}
-
 }
 
-module.exports = User;
+class Student {
+	constructor(root) {
+		this.modification = (root.modification == "1") ? true : false;
+		this.school = root.school;
+		this.sclevel = root.sclevel;
+		this.branche = root.branche;
+		this.sec = root.sec;
+		this.grp = root.grp;
+		this.sgrp = root.sgrp;
+	}
+	getLevel() {
+		return ordinal_suffix_of(parseInt(this.sclevel)) + " year student";
+	}
+}
+
+class Laureat {
+	constructor(root) {
+		this.modification = (root.modification == "1") ? true : false;
+		this.school = root.school;
+		this.branche = root.branche;
+	}
+}
+
+module.exports = {User, Student, Laureat};
