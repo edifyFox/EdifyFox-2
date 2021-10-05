@@ -2,7 +2,7 @@ const { remote } = require('electron');
 let win = remote.getCurrentWindow();
 
 const newsId = document.getElementById("dscfn");
-let OSName="Unknown OS";
+let OSName = "Unknown OS";
 
 
 $.ajax({
@@ -36,10 +36,20 @@ $('#close').click(function(){
 });
 
 $('#maxi').click(function() {
-  if(win.isMaximized()){
-      win.unmaximize();
-  }else{
-      win.maximize();
+  // if ($('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
+  //   win.unmaximize();
+  // } else {
+  //   if(win.isMaximized()) {
+  //     win.unmaximize();
+  //   } else {
+  //     win.maximize();
+  //   }
+  // }
+
+  if(win.isMaximized()) {
+    win.unmaximize();
+  } else {
+    win.maximize();
   }
 });
 

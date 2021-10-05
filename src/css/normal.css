@@ -73,4 +73,7 @@ body {
   overflow: hidden;
   position: relative;
   top: 30px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
 }
