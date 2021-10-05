@@ -117,7 +117,6 @@ function loginSuccess() {
             }, 1500);
             setTimeout(function() { 
                 document.getElementById('itm2').className = 'animtwo';
-                launchEffect();
             }, 1900);
             if (!user.sObj.modification) {
                 setTimeout(function() {
@@ -201,7 +200,6 @@ function yahlogin() {
 }
 
 $('#lgout').click(function() {
-    stopEffect();
     setSessionData('logout');
     user.logout();
     crntweek = crntdbssh;
