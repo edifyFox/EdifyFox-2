@@ -1,12 +1,9 @@
-// import { User,Student,Laureat } from './logger';
-
 const $ = require('jquery');
 const { ipcRenderer } = require('electron');
 const { BrowserWindow } = require('electron').remote;
 const url = require('url');
 const path = require('path');
 const {User,Student,Laureat} = require(path.join(__dirname, 'js/logger.js'));
-
 
 // INITIATE USER
 var user = new User();
@@ -57,6 +54,8 @@ function alertada(msg) {
 $('.bcblak').click(function() {
     if (document.getElementById('wrapEdits').className == 'dialogwinEdit_' && !user.sObj.modification && !notConnectedBool) {
         console.log('You must complete sign up first ...');
+        $('#alertada').css('opacity','0');
+        $('#alertada').css('pointer-events','none');
     }
     else {
         alertadaT = false;
@@ -98,88 +97,57 @@ setInterval(function(){
 
 
 //LOGINS
-
 function loginSuccess() {
-    if(user.session && user.sObj != null) {
-        notConnectedBool = false;
-        setSessionData('login');
-        setWishPerTime();
-        mdularaya();
-        // getScdlAndWeekNum(crntweek);
-        prf3mer();
-        loadnotif();
-        setInterval(function() {
-            loadnotif();
-        }, 5000);
-        $('.mrbnvz2').css('display', 'block');
-        setTimeout(function() { 
-            $('.bcblak').click();
-            document.getElementById('itm1').className = 'animone';
-        }, 1500);
-        setTimeout(function() { 
-            document.getElementById('itm2').className = 'animtwo';
-        }, 1900);
-        if (!user.sObj.modification) {
-            setTimeout(function() {
-                editron(1);
-            }, 2500);
-        } else {
-            setTimeout(function() { 
-                document.getElementById('itm3').className = 'sdmn';
-                $('.wrapper').css('opacity', '1');
-            }, 2500);
-        }
-        $("#signupFORM")[0].reset();
-        $("#signinFORM")[0].reset();
-        console.log('Welcome');
-    } else {
-        notConnectedBool = false;
-        $('.mrbnvz2').css('display', 'block');
-        setTimeout(function() { 
-            $('.bcblak').click();
-            document.getElementById('itm1').className = 'animone';
-        }, 1500);
-        setTimeout(function() { 
-            document.getElementById('itm2').className = 'animtwo';
-        }, 1900);
-        setTimeout(function() {
-            editron(2);
-        }, 2500);
-        $("#signupFORM")[0].reset();
-        $("#signinFORM")[0].reset();
-    }
-}
-
-function setWishPerTime() {
     if (user.session) {
-        var day = new Date();
-        var hr = day.getHours();
-        if (hr >= 0 && hr < 12) {
-            document.getElementById("shname").innerHTML = `Good Morning ${user.firstname} !`;
-        } else if (hr == 12) {
-            document.getElementById("shname").innerHTML = `Good Noon ${user.firstname} !`;
-        } else if (hr >= 12 && hr <= 17) {
-            document.getElementById("shname").innerHTML = `Good Afternoon ${user.firstname} !`;
+        if(user.sObj != null) {
+            notConnectedBool = false;
+            setSessionData('login');
+            setWishPerTime();
+            mdularaya();
+            // getScdlAndWeekNum(crntweek);
+            prf3mer();
+            loadnotif();
+            setInterval(function() {
+                loadnotif();
+            }, 5000);
+            $('.mrbnvz2').css('display', 'block');
+            setTimeout(function() { 
+                $('.bcblak').click();
+                document.getElementById('itm1').className = 'animone';
+            }, 1500);
+            setTimeout(function() { 
+                document.getElementById('itm2').className = 'animtwo';
+                launchEffect();
+            }, 1900);
+            if (!user.sObj.modification) {
+                setTimeout(function() {
+                    editron(1);
+                }, 2500);
+            } else {
+                setTimeout(function() { 
+                    document.getElementById('itm3').className = 'sdmn';
+                    $('.wrapper').css('opacity', '1');
+                }, 2500);
+            }
+            $("#signupFORM")[0].reset();
+            $("#signinFORM")[0].reset();
+            console.log('Welcome');
         } else {
-            document.getElementById("shname").innerHTML = `Good Evening ${user.firstname} !`;
+            notConnectedBool = false;
+            $('.mrbnvz2').css('display', 'block');
+            setTimeout(function() { 
+                $('.bcblak').click();
+                document.getElementById('itm1').className = 'animone';
+            }, 1500);
+            setTimeout(function() { 
+                document.getElementById('itm2').className = 'animtwo';
+            }, 1900);
+            setTimeout(function() {
+                editron(2);
+            }, 2500);
+            $("#signupFORM")[0].reset();
+            $("#signinFORM")[0].reset();
         }
-    }
-}
-
-function prf3mer() {
-    if (user.session && user.accType == "student") {
-        document.getElementById("prfcrdstt").innerHTML = user.sObj.getLevel();
-        document.getElementById("prfcrdgnd").innerHTML = user.sObj.branche;
-        document.getElementById("prfcrdage").innerHTML = user.getAge();
-        document.getElementById("prfcrdddn").innerHTML = user.getBirthday();
-        document.getElementById("prfcrdsec").innerHTML = "sec-" + user.sObj.sec;
-        document.getElementById("prfcrdgrp").innerHTML = "G-" + user.sObj.grp;
-        document.getElementById("prfcrdsgp").innerHTML = "SG-" + user.sObj.sgrp;
-        document.getElementById("prfcrdddc").innerHTML = user.getSubsDay();
-        document.getElementById("prfcrdnam").innerHTML = user.getName();
-        document.getElementById("prfcrdema").innerHTML = user.email;
-        document.getElementById("prfcrdpwd").innerHTML = user.pwd;
-        document.getElementById("prfcrdimg").src = user.getPdp();
     }
 }
 
@@ -233,6 +201,7 @@ function yahlogin() {
 }
 
 $('#lgout').click(function() {
+    stopEffect();
     setSessionData('logout');
     user.logout();
     crntweek = crntdbssh;
@@ -301,7 +270,7 @@ function editron(msg) {
         var ajax = new XMLHttpRequest();
         ajax.addEventListener("load", function(event) {
             document.getElementById('wrapEdits').innerHTML = event.target.response;
-            setTimeout(function() { 
+            setTimeout(function() {
                 document.getElementById('wrapEdits').className = 'dialogwinEdit_';
             }, 200);
         }, false);
@@ -314,6 +283,7 @@ function finishTmlg() {
     if (user.sObj == null) timeLineData.append("isNewAccount", 1);
     var ajax = new XMLHttpRequest();
     ajax.addEventListener("load", function(event) {
+        console.log(event.target.response);
         if (event.target.response == "YESS") {
             if (user.sObj != null) user.sObj.modification = true;
             timeLineData.delete("idUsr");
@@ -403,38 +373,76 @@ $('#ajtcbzf').click(function() {
 
 function loadnotif() {
     if (user.session && navigator.onLine) {
-        $.ajax({
-            url: 'http://localhost/PROJECTFILEPHP/php/notifreader.php',
-            method: 'POST',
-            data: {
-                option : start,
-                sclvl : user.sclevel,
-                branche: user.sObj.branche,
-                sclsec : user.sObj.sec,
-                sclgrp : user.sObj.grp,
-                scSgrp : user.sObj.sgrp,
-                sesID : user.id
-            },
-            dataType: 'json',
-            success: function(data) {
-                $('#ntfwrapthings').html(data.tb);
-                if(data.num > 0) {
-                    $('#spinoza').css('opacity', '1');
-                } else {
-                    $('#spinoza').css('opacity', '0');
-                }
-                $('#spinoza').html(data.num);
-                document.getElementById('ajtcbzf').style.width = '90px';
-                document.getElementById('ajtcbzf').style.height = 'auto';
-                document.getElementById('ajtcbzf').style.margin = '30px auto';
-                document.getElementById('ajtcbzf').className = "bgtncbzf";
-                document.getElementById('ajtcbzf').innerHTML = "LOAD MORE";
-            }
-        });        
+        // $.ajax({
+        //     url: 'http://localhost/PROJECTFILEPHP/php/notifreader.php',
+        //     method: 'POST',
+        //     data: {
+        //         option : start,
+        //         sclvl : user.sclevel,
+        //         branche: user.sObj.branche,
+        //         sclsec : user.sObj.sec,
+        //         sclgrp : user.sObj.grp,
+        //         scSgrp : user.sObj.sgrp,
+        //         sesID : user.id
+        //     },
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         $('#ntfwrapthings').html(data.tb);
+        //         if(data.num > 0) {
+        //             $('#spinoza').css('opacity', '1');
+        //         } else {
+        //             $('#spinoza').css('opacity', '0');
+        //         }
+        //         $('#spinoza').html(data.num);
+        //         document.getElementById('ajtcbzf').style.width = '90px';
+        //         document.getElementById('ajtcbzf').style.height = 'auto';
+        //         document.getElementById('ajtcbzf').style.margin = '30px auto';
+        //         document.getElementById('ajtcbzf').className = "bgtncbzf";
+        //         document.getElementById('ajtcbzf').innerHTML = "LOAD MORE";
+        //     }
+        // });        
     }
 }
 
 
+
+
+
+
+// FILLING
+
+function setWishPerTime() {
+    if (user.session) {
+        var day = new Date();
+        var hr = day.getHours();
+        if (hr >= 0 && hr < 12) {
+            document.getElementById("shname").innerHTML = `Good Morning ${user.firstname} !`;
+        } else if (hr == 12) {
+            document.getElementById("shname").innerHTML = `Good Noon ${user.firstname} !`;
+        } else if (hr >= 12 && hr <= 17) {
+            document.getElementById("shname").innerHTML = `Good Afternoon ${user.firstname} !`;
+        } else {
+            document.getElementById("shname").innerHTML = `Good Evening ${user.firstname} !`;
+        }
+    }
+}
+
+function prf3mer() {
+    if (user.session && user.accType == "student") {
+        document.getElementById("prfcrdstt").innerHTML = user.sObj.getLevel();
+        document.getElementById("prfcrdgnd").innerHTML = user.sObj.branche;
+        document.getElementById("prfcrdage").innerHTML = user.getAge();
+        document.getElementById("prfcrdddn").innerHTML = user.getBirthday();
+        document.getElementById("prfcrdsec").innerHTML = "sec-" + user.sObj.sec;
+        document.getElementById("prfcrdgrp").innerHTML = "G-" + user.sObj.grp;
+        document.getElementById("prfcrdsgp").innerHTML = "SG-" + user.sObj.sgrp;
+        document.getElementById("prfcrdddc").innerHTML = user.getSubsDay();
+        document.getElementById("prfcrdnam").innerHTML = user.getName();
+        document.getElementById("prfcrdema").innerHTML = user.email;
+        document.getElementById("prfcrdpwd").innerHTML = user.pwd;
+        document.getElementById("prfcrdimg").src = user.getPdp();
+    }
+}
 
 
 

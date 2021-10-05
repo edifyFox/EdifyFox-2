@@ -4,6 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/homepage.css" />
+    <link rel="stylesheet" href="css/normal.css" />
     <title>edifyfox</title>
   </head>
   <body>
@@ -378,190 +380,93 @@
       </div>
       <div class="wrapper">
         <div class="prfdv">
-          <div class="sdmn2">
-            <div id="hmes1" class="smn2it">
-              <div class="smdl3iba">home</div>
-              <div id="hms1" class="dvl3iba opa1"></div>
-            </div>
-            <div id="hmes2" class="smn2it">
-              <div class="smdl3iba">to do list</div>
-              <div id="hms2" class="dvl3iba"></div>
-            </div>
-            <!-- <div id="hmes3" class="smn2it">
-                    <div class="smdl3iba">schedule</div>
-                    <div id="hms3" class="dvl3iba"></div>
-                </div> -->
-            <div id="hmes4" class="smn2it">
-              <div class="smdl3iba">weather</div>
-              <div id="hms4" class="dvl3iba"></div>
-            </div>
-          </div>
-          <div id="anm1" class="anim">
-            <div class="vid">
-              <video autoplay loop src="vids/nn.mp4"></video>
+          <div class="anim">
+            <div id="backEffects" class="vid">
+              <!-- <video autoplay loop src="vids/nn.mp4"></video> -->
+              <img src="img/backVid.jpg" />
             </div>
             <div class="bcscrn"></div>
-            <div class="txndor">
-              <p id="shname"></p>
-              <p>it's nice to meet you</p>
-            </div>
-          </div>
-          <div id="amm2" class="animtdl">
-            <h1 class="title">
-              start palnning today
-              <b
-                >plan your day to get more done ,Don't waste time thinking about
-                what you should to do</b
-              >
-            </h1>
-            <div class="wraptdl">
-              <div class="all-tasks">
-                <h2 class="task-list-title">My lists</h2>
-                <ul class="task-list" data-lists></ul>
-
-                <form action="" data-new-list-form>
-                  <input
-                    type="text"
-                    class="new list"
-                    data-new-list-input
-                    placeholder="new list name"
-                    aria-label="new list name"
-                  />
-                  <button class="btn create" aria-label="create new list">
-                    +
-                  </button>
-                </form>
-              </div>
-
-              <div class="todo-list" data-list-display-container>
-                <div class="todo-header">
-                  <h2 class="list-title" data-list-title></h2>
-                  <p class="task-count" data-list-count></p>
-                </div>
-
-                <div class="todo-body">
-                  <div class="tasks" data-tasks></div>
-
-                  <div class="new-task-creator">
-                    <form action="" data-new-task-form>
-                      <input
-                        type="text"
-                        data-new-task-input
-                        class="new task"
-                        placeholder="new task name"
-                        aria-label="new task name"
-                      />
-                      <button class="btn create" aria-label="create new task">
-                        +
-                      </button>
-                    </form>
-                  </div>
-
-                  <div class="delete-stuff">
-                    <button class="btn delete" data-clear-complete-tasks-button>
-                      Clear completed tasks
-                    </button>
-                    <button class="btn delete" data-delete-list-button>
-                      Delete list
-                    </button>
-                  </div>
+            <div class="homeDesign">
+              <div class="hmdHeader">
+                <div class="txndor">
+                  <p id="shname"></p>
+                  <p id="quoteApi"></p>
                 </div>
               </div>
-            </div>
-
-            <template id="task-template">
-              <div class="task">
-                <input type="checkbox" />
-                <label>
-                  <span class="custom-checkbox"></span>
-                </label>
-              </div>
-            </template>
-          </div>
-          <!-- <div id="amm3" class="animscd">
-                <div class="scdltit">
-                    <div class="scdcrtweek"> <i class="material-icons">keyboard_arrow_left</i> </div>
-                    <span>week <b id="weekNB">--</b></span>
-                    <div class="scdnxtweek"> <i class="material-icons">navigate_next</i> </div>
+              <div class="hmdMain">
+                <div class="hmdAnnoucement">
+                  <div id="announcmentWrapper" class="annWrp"></div>
                 </div>
-                <div class="scdlop">
-                    <div class="scdldays">
-                        <div class="scdtm">Monday</div>
-                        <div class="scdtm">tuesday</div>
-                        <div class="scdtm">wednesday</div>
-                        <div class="scdtm">thursday</div>
-                        <div class="scdtm">friday</div>
-                    </div>
-                    <div class="scdlwrap">
-                        <div class="scdltime">
-                            <div class="scdtm">08:30</div>
-                            <div class="scdtm">09:30</div>
-                            <div class="scdtm">10:30</div>
-                            <div class="scdtm">11:30</div>
-                            <div class="scdtm">12:30</div>
-                            <div class="scdtm">13:30</div>
-                            <div class="scdtm">14:30</div>
-                            <div class="scdtm">15:30</div>
-                            <div class="scdtm">16:30</div>
-                            <div class="scdtm">17:30</div>
-                            <div class="scdtm">18:30</div>
-                            <div class="scdtm">19:30</div>
+                <div class="hmdSideArea">
+                  <div class="hmdWth">
+                    <div class="wthwidget">
+                      <div class="wwback">
+                        <img />
+                      </div>
+                      <div class="wweffect"></div>
+                      <div class="wwdata">
+                        <div class="wwleftdata">
+                          <div class="wwlocation">
+                            <div class="wwcity"></div>
+                            <div class="wwlocico">
+                              <i class="material-icons">near_me</i>
+                            </div>
+                          </div>
+                          <div class="wwtemp"></div>
                         </div>
-                        <div class="scdlcontent">
-                            <div class="scdLundi"></div>
-                            <div class="scdMardi"></div>
-                            <div class="scdMercredi"></div>
-                            <div class="scdJeudi"></div>
-                            <div class="scdVendredi"></div>
+                        <div class="wwrightdata">
+                          <div class="wwicon">
+                            <img />
+                          </div>
+                          <div class="wwdesc"></div>
+                          <div class="wwhighlow"></div>
                         </div>
+                      </div>
                     </div>
-                </div>
-            </div> -->
-          <div id="amm1" class="animwth">
-            <div class="data1wth">
-              <img src="" />
-              <div class="dtwthstat">-</div>
-              <div class="dtwthmdina">-</div>
-              <div class="dtwthtemp">-°C</div>
-            </div>
-            <div class="data2wth">
-              <div class="dtwthmore">
-                <img src="icons/wth/humidity.png" alt="humidity" />
-                <div class="dtwthdivat">
-                  <label>humidity</label>
-                  <div id="dtwthvar1" class="dtwthvar">-</div>
+                  </div>
+                  <div class="hmdSpnArea">
+                    <div class="spnsItems">
+                      <div class="spiContent">
+                        <div class="spiHead">
+                          <div class="spiTitle">
+                            <i class="material-icons">grade</i>
+                            <span>sponsored</span>
+                          </div>
+                          <div class="spiAct">
+                            <div class="spiButt">
+                              <abbr title="Report"
+                                ><i class="material-icons">flag</i></abbr
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="spiData">
+                          <div class="spimedia">
+                            <img
+                              class="spiBack"
+                              src="img/ensamMeknes.jpg"
+                              alt="this image is showing ensam meknes"
+                            />
+                          </div>
+                          <div class="spiDesc">
+                            The prof Al Mokhtar Zemmori is off this week
+                            voluptate suscipit, fuga, pariatur placeat
+                            cupiditate, nisi exercitationem inventore est iusto
+                            non.
+                          </div>
+                          <div class="spiActions">See more ...</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="dtwthmore">
-                <img src="icons/wth/pressure.png" alt="pressure" />
-                <div class="dtwthdivat">
-                  <label>pressure</label>
-                  <div id="dtwthvar2" class="dtwthvar">-</div>
-                </div>
-              </div>
-              <div class="dtwthmore">
-                <img src="icons/wth/wind.png" alt="wind" />
-                <div class="dtwthdivat">
-                  <label>wind</label>
-                  <div id="dtwthvar3" class="dtwthvar">-</div>
-                </div>
-              </div>
-              <div class="dtwthmore">
-                <img src="icons/wth/sunrise.png" alt="sunrise" />
-                <div class="dtwthdivat">
-                  <label>sunrise</label>
-                  <div id="dtwthvar4" class="dtwthvar">-</div>
-                </div>
-              </div>
-              <div class="dtwthmore">
-                <img src="icons/wth/sunset.png" alt="sunset" />
-                <div class="dtwthdivat">
-                  <label>sunset</label>
-                  <div id="dtwthvar5" class="dtwthvar">-</div>
-                </div>
+              <div class="hmdFoot">
+                <span>edifyfox</span>
+                <span>Copyright © 2021 | All Rights Reserved</span>
+                <span>Designed by ENSAM Students in Meknes</span>
               </div>
             </div>
-            <div class="data3wth"></div>
           </div>
         </div>
         <div class="firscard_" id="anm2">
@@ -653,7 +558,7 @@
     <script defer src="js/homeApp.js"></script>
     <script defer src="js/wheatherApp.js"></script>
     <script defer src="js/welcomePage.js"></script>
-    <script defer src="js/todolist.js"></script>
+    <!-- <script defer src="js/todolist.js"></script> -->
     <script defer src="js/tmlg.js"></script>
   </body>
 </html>
