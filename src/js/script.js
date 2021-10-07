@@ -231,8 +231,10 @@ $(document).on('keypress',function(e) {
     if(e.which == 13) {
         if (alertadaT) $('.bcblak').click();
         else {
-            if (document.getElementById('suppdiv').className == "signupdiv_" && $('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
+            if (document.getElementById('lgppdiv').className == "frmlgn_" && $('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
                 yahlogin();
+            } else {
+                return false;
             }
         }
     }

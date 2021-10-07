@@ -47,16 +47,17 @@
   height: 100%;
   z-index: 2;
   overflow: hidden;
-  background: linear-gradient(
+  background: rgb(28 35 41 / 40%);
+  /* background: linear-gradient(
     203deg,
     rgb(28 35 41 / 95%),
-    rgb(28 35 41 / 55%),
+    rgb(28 35 41 / 40%),
     rgb(28 35 41 / 95%),
-    rgb(28 35 41 / 55%),
+    rgb(28 35 41 / 40%),
     rgb(28 35 41 / 95%)
-  );
-  background-size: 1000% 1000%;
-  animation: AnimationName 20s ease-in-out infinite;
+  ); */
+  /* background-size: 1000% 1000%; */
+  /* animation: AnimationName 20s ease-in-out infinite; */
 }
 .homeDesign {
   position: absolute;

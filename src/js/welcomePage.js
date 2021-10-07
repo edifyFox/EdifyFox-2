@@ -6,9 +6,9 @@ var Curves = (function () {
 
     var config = {
         bgColor: '#21292f',
-        pointColor: 'rgba(255, 255, 255, 0.16)',
+        pointColor: 'rgba(255, 255, 255, 0.00)',
         curvesColors: [
-            '#293947', '#2e4e6a', '#37658d', '#3d7aae', '#4599ce', '#59aad3'
+            '#293947', '#3b566a', '#476b84', '#54809d', '#6197b8', '#6fadd4'
         ]
     };
 
@@ -62,7 +62,7 @@ var Curves = (function () {
     var width = window.innerWidth;
     var height = window.innerHeight;
 
-    var density = 15;
+    var density = 12;
     if (width < 601) {
         density = 10;
     }
@@ -158,7 +158,6 @@ var firstName = $("#frstnm")[0];
 var lastName = $("#scdnm")[0];
 var email = $("#mailchk")[0];
 var passcode = $("#pwd")[0];
-var passcodec = $("#pwdc")[0];
 var dayB = $("#jour")[0];
 var monthB = $("#mois")[0];
 var yearB = $("#annee")[0];
@@ -168,13 +167,12 @@ var inputLists = {
     text : [firstName,lastName],
     mail : [email],
     pwd : [passcode],
-    pwdc : [passcodec],
     select : [dayB,monthB,yearB,gender]
 };
 
 
 function badInput(elm) {
-    $(elm).css('box-shadow', '0px 2px 20px #b71c1c73');
+    $(elm).css('box-shadow', '0px 0px 3px #f44336 ');
 }
 function goodInput(elm) {
     $(elm).css('box-shadow', 'unset');
@@ -208,15 +206,15 @@ function checkPasscode(elm) {
         return false
     }
 }
-function verifyPasscode(elm) {
-    if (elm.value == passcode.value) {
-        goodInput(elm);
-        return true
-    } else {
-        badInput(elm);
-        return false
-    }
-}
+// function verifyPasscode(elm) {
+//     if (elm.value == passcode.value) {
+//         goodInput(elm);
+//         return true
+//     } else {
+//         badInput(elm);
+//         return false
+//     }
+// }
 function checkSelect(elm) {
     if (elm.value != 'none') {
         goodInput(elm);
@@ -237,9 +235,6 @@ $("#cnfsignup").on('click',function() {
     });
     inputLists.pwd.forEach(element => {
         checked = checkPasscode(element) ? checked : false;
-    });
-    inputLists.pwdc.forEach(element => {
-        checked = verifyPasscode(element) ? checked : false;
     });
     inputLists.select.forEach(element => {
         checked = checkSelect(element) ? checked : false;
@@ -283,13 +278,63 @@ $("#cnfsignup").on('click',function() {
 
 $('#signup').click(function () {
     document.getElementById("suppdiv").className = "signupdiv";
+    document.getElementById("lgppdiv").className = "frmlgn";
     $("#suppdiv").scrollTop(0);
 });
 
 $('#gotosignin').click(function () {
     document.getElementById("suppdiv").className = "signupdiv_";
+    document.getElementById("lgppdiv").className = "frmlgn_";
     $("#suppdiv").scrollTop(0);
+    $("#signupFORM")[0].reset();
 });
+$('#gotosignin2').click(function () {
+    document.getElementById("suppdiv").className = "signupdiv_";
+    document.getElementById("lgppdiv").className = "frmlgn_";
+    $("#suppdiv").scrollTop(0);
+    $("#signupFORM")[0].reset();
+});
+
+$('#frgtPasAct').click(function () {
+    document.getElementById("lgppdiv").className = "frmlgn";
+    document.getElementById("fgpsdiv").className = "forgtdiv";
+});
+
+$('#frgtPasBck').click(function () {
+    document.getElementById("lgppdiv").className = "frmlgn_";
+    document.getElementById("fgpsdiv").className = "forgtdiv_";
+    document.querySelector(".frgtdivItem").className = "frgtdivItem";
+    document.querySelector(".frgtdivSent").className = "frgtdivSent";
+    $('#forgetPassFORM')[0].reset();
+});
+
+$('#sndVerifBut').click(function () {
+    let mailAdress = document.getElementById('frgtpassInp');
+    if (checkEmail(mailAdress)) {
+        alertada();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/PROJECTFILEPHP/php/mailServices/passwordReset.php",
+            data: {
+                email: mailAdress.value,
+            },
+            success: (data, statuts) => {
+                console.log(data);
+                if (data == "done") {
+                    document.getElementById("viewMailLink").innerHTML = `Please check your inbox <span>${mailAdress.value}</span>`;
+                    document.querySelector(".frgtdivItem").className += " hide-it";
+                    document.querySelector(".frgtdivSent").className += " show-it";
+                    $('.bcblak').click();
+                } else {
+                    alertada(data);
+                }
+            },
+            dataType: 'text'
+        });
+    }
+});
+
+
 
 $("#frstnm").on('input',function () {
     checkText(this);

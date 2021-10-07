@@ -36,16 +36,6 @@ $('#close').click(function(){
 });
 
 $('#maxi').click(function() {
-  // if ($('.mrbnvz2').css('display') != 'block' && document.getElementById('bnzr').className == 'bnvz1_') {
-  //   win.unmaximize();
-  // } else {
-  //   if(win.isMaximized()) {
-  //     win.unmaximize();
-  //   } else {
-  //     win.maximize();
-  //   }
-  // }
-
   if(win.isMaximized()) {
     win.unmaximize();
   } else {
