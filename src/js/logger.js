@@ -138,8 +138,10 @@ class Student {
 	constructor(root) {
 		this.modification = (root.modification == "1") ? true : false;
 		this.school = root.school;
+		this.schoolId = root.schoolId;
 		this.sclevel = root.sclevel;
 		this.branche = root.branche;
+		this.branchId = root.branchId;
 		this.sec = root.sec;
 		this.grp = root.grp;
 		this.sgrp = root.sgrp;
@@ -153,7 +155,9 @@ class Laureat {
 	constructor(root) {
 		this.modification = (root.modification == "1") ? true : false;
 		this.school = root.school;
+		this.schoolId = root.schoolId;
 		this.branche = root.branche;
+		this.branchId = root.branchId;
 	}
 }
 

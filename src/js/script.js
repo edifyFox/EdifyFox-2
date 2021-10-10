@@ -360,47 +360,51 @@ $('.wrapper').click(function() {
     }
 });
 
-var start = 10;
+var start = 3;
 
-$('#ajtcbzf').click(function() {
-    document.getElementById('ajtcbzf').innerHTML = "";
-    document.getElementById('ajtcbzf').className = "switcher_LOAD";
-    document.getElementById('ajtcbzf').style.width = '20px';
-    document.getElementById('ajtcbzf').style.height = '20px';
-    document.getElementById('ajtcbzf').style.margin = '30px auto';
-    start = start + 10;
-});
+// $('#ajtcbzf').click(function() {
+//     document.getElementById('ajtcbzf').innerHTML = "";
+//     document.getElementById('ajtcbzf').className = "switcher_LOAD";
+//     document.getElementById('ajtcbzf').style.width = '20px';
+//     document.getElementById('ajtcbzf').style.height = '20px';
+//     document.getElementById('ajtcbzf').style.margin = '30px auto';
+//     start = start + 10;
+// });
 
 function loadnotif() {
+    let config = {};
+    if (user.accType == 'student') {
+        config = {
+            st : start,
+            accType : user.accType,
+            schoolId : user.sObj.schoolId,
+            year : user.sObj.sclevel,
+            branchId : user.sObj.branchId,
+            sec : user.sObj.branchId,
+            grp : user.sObj.branchId,
+            sgrp : user.sObj.branchId,
+            idUsr : user.id,
+        }
+    }
+    if (user.accType == 'laureate') {
+        config = {
+            st : start,
+            accType : user.accType,
+            schoolId : user.sObj.schoolId,
+            branchId : user.sObj.branchId,
+            idUsr : user.id,
+        }
+    }
     if (user.session && navigator.onLine) {
-        // $.ajax({
-        //     url: 'http://localhost/PROJECTFILEPHP/php/notifreader.php',
-        //     method: 'POST',
-        //     data: {
-        //         option : start,
-        //         sclvl : user.sclevel,
-        //         branche: user.sObj.branche,
-        //         sclsec : user.sObj.sec,
-        //         sclgrp : user.sObj.grp,
-        //         scSgrp : user.sObj.sgrp,
-        //         sesID : user.id
-        //     },
-        //     dataType: 'json',
-        //     success: function(data) {
-        //         $('#ntfwrapthings').html(data.tb);
-        //         if(data.num > 0) {
-        //             $('#spinoza').css('opacity', '1');
-        //         } else {
-        //             $('#spinoza').css('opacity', '0');
-        //         }
-        //         $('#spinoza').html(data.num);
-        //         document.getElementById('ajtcbzf').style.width = '90px';
-        //         document.getElementById('ajtcbzf').style.height = 'auto';
-        //         document.getElementById('ajtcbzf').style.margin = '30px auto';
-        //         document.getElementById('ajtcbzf').className = "bgtncbzf";
-        //         document.getElementById('ajtcbzf').innerHTML = "LOAD MORE";
-        //     }
-        // });        
+        $.ajax({
+            url: 'http://localhost/PROJECTFILEPHP/php/home/announcements.php',
+            method: 'POST',
+            data: config,
+            dataType: 'json',
+            success: function(data,err) {
+                $('#announcmentWrapper').html(data.htmlData);
+            }
+        });        
     }
 }
 
