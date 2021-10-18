@@ -77,3 +77,159 @@ body {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.frame {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  width: 100vw;
+  height: 30px;
+  background: rgba(180, 180, 180, 0.04);
+  /* -webkit-user-select: none; */
+  -webkit-app-region: drag;
+}
+
+.nameapp {
+  position: absolute;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  left: 12px;
+  font-family: "Gilroy";
+  text-transform: lowercase;
+  font-weight: 500;
+  color: #ffffff7a;
+}
+img.edifyappname {
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  object-fit: contain;
+  filter: contrast(0.5);
+}
+
+.descfn {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 15px;
+  height: 30px;
+  line-height: 30px;
+  font-family: "Raleway";
+  -webkit-app-region: no-drag;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 9px;
+  cursor: pointer;
+  color: #ffffff78;
+}
+.descNLb {
+  font-weight: 400;
+  color: aliceblue;
+}
+
+.nameappmac {
+  position: absolute;
+  height: 30px;
+  line-height: 30px;
+  font-size: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Raleway";
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: #ffffff7a;
+}
+
+.sd {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 0;
+  right: 0;
+  background: url(../icons/x.png) no-repeat center center;
+  background-size: 30%;
+  filter: invert(1);
+  -webkit-app-region: no-drag;
+}
+
+.sdmac {
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  background: rgb(252, 90, 82);
+  border-radius: 100%;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+}
+
+.sdd {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 0;
+  right: 60px;
+  background: url(../icons/min.png) no-repeat center 11px;
+  background-size: 48%;
+  text-align: center;
+  line-height: 15px;
+  -webkit-app-region: no-drag;
+  filter: invert(1);
+}
+
+.sddmac {
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 31px;
+  background: rgb(229, 192, 40);
+  border-radius: 100%;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+}
+
+.sddd {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 0;
+  right: 30px;
+  background: url(../icons/max.png) no-repeat center center;
+  background-size: 35%;
+  filter: invert(1);
+  -webkit-app-region: no-drag;
+}
+
+.sdddmac {
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 52px;
+  background: rgb(83, 194, 43);
+  border-radius: 100%;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+}
+
+.sd:hover {
+  background-color: #00bcd4a1;
+  cursor: pointer;
+}
+
+.sddd:hover,
+.sdd:hover {
+  background-color: #f3ece6;
+  cursor: pointer;
+}

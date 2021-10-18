@@ -1,17 +1,10 @@
+
 const { remote } = require('electron');
 let win = remote.getCurrentWindow();
-
-const newsId = document.getElementById("dscfn");
 let OSName = "Unknown OS";
 
-
-$.ajax({
-  type: "POST",
-  url: "https://edifyfox.com/php/ads.php",
-  success: (data, statuts) => {
-      newsId.innerHTML = data;
-  },
-  dataType: 'text'
+$.post("http://localhost/PROJECTFILEPHP/php/adsServices/sponsoredTopBar.php", function(data,status){
+  document.getElementById("dscfn").innerHTML = data;
 });
 
 

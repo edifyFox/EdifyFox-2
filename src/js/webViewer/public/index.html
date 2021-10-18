@@ -1,25 +1,102 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="../../../css/normal.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="../../../../node_modules/@pdftron/webviewer/webviewer.min.js"></script>
   </head>
 
-  <body style="margin: 0; padding: 0;">
-
+  <body style="margin: 0; padding: 0">
     <div class="frame">
-        <div class="nameapp" id="nmapp" style="width: 29%;overflow: hidden;text-overflow: ellipsis;"></div>
-        <div class="descfn" id="dscfn"></div>
-        <div class="sd" id="close"></div>
-        <div class="sddd" id="maxi"></div>
-        <div class="sdd" id="mini"></div>
+      <div class="nameapp" id="nmapp"></div>
+      <div class="sd" id="close"></div>
+      <div class="sddd" id="maxi"></div>
+      <div class="sdd" id="mini"></div>
     </div>
 
     <div id="viewer" class="wrapper"></div>
 
-    <script>require('../src/App.js');</script>
-    <script>const $ = require('jquery');</script>
-    <script>require('../../topBar.js');</script>
+    <div class="dialogwrap" style="display: none">
+      <div class="bcblak"></div>
+      <img
+        id="loadwin"
+        class="lding_"
+        src="../../../icons/preloader.gif"
+        alt="LOADING"
+      />
+      <div id="DlgBoxForRating" class="dialogwin">
+        <div id="toGetRatingId" class="ratingDlg-Title" data-iddrs="0">
+          Did you like "<b></b>" ?
+        </div>
+        <div class="ratingDlg-Label">Let us know what you think</div>
+        <div class="ratingDlg-Stars">
+          <i
+            id="setRatingFor5"
+            data-rate="5"
+            class="material-icons ratingDlg-Star"
+            >star</i
+          >
+          <i
+            id="setRatingFor4"
+            data-rate="4"
+            class="material-icons ratingDlg-Star"
+            >star</i
+          >
+          <i
+            id="setRatingFor3"
+            data-rate="3"
+            class="material-icons ratingDlg-Star"
+            >star</i
+          >
+          <i
+            id="setRatingFor2"
+            data-rate="2"
+            class="material-icons ratingDlg-Star"
+            >star</i
+          >
+          <i
+            id="setRatingFor1"
+            data-rate="1"
+            class="material-icons ratingDlg-Star"
+            >star</i
+          >
+        </div>
+      </div>
+      <div
+        id="thanksForRating"
+        class="dialogwin"
+        style="
+          padding: 40px;
+          color: #171717;
+          font-family: 'Gilroy';
+          font-size: 30px;
+          z-index: 0;
+        "
+      >
+        <i
+          class="material-icons"
+          style="
+            display: block;
+            text-align: center;
+            margin: auto;
+            margin-bottom: 10px;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-weight: bold;
+            background: #66bb6a;
+            border-radius: 100%;
+            color: #fff;
+          "
+          >done</i
+        >
+        Thanks You !
+      </div>
+    </div>
+
+    <script>
+      require("../src/App.js");
+    </script>
   </body>
 </html>

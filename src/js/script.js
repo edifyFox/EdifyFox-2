@@ -104,11 +104,10 @@ function loginSuccess() {
             setSessionData('login');
             setWishPerTime();
             mdularaya();
-            // getScdlAndWeekNum(crntweek);
             prf3mer();
-            loadnotif();
+            loadAnnouncement();
             setInterval(function() {
-                loadnotif();
+                loadAnnouncement();
             }, 5000);
             $('.mrbnvz2').css('display', 'block');
             setTimeout(function() { 
@@ -126,6 +125,7 @@ function loginSuccess() {
                 setTimeout(function() { 
                     document.getElementById('itm3').className = 'sdmn';
                     $('.wrapper').css('opacity', '1');
+                    announcementViewCheck();
                 }, 2500);
             }
             $("#signupFORM")[0].reset();
@@ -360,22 +360,39 @@ $('.wrapper').click(function() {
     }
 });
 
-var start = 3;
 
-// $('#ajtcbzf').click(function() {
-//     document.getElementById('ajtcbzf').innerHTML = "";
-//     document.getElementById('ajtcbzf').className = "switcher_LOAD";
-//     document.getElementById('ajtcbzf').style.width = '20px';
-//     document.getElementById('ajtcbzf').style.height = '20px';
-//     document.getElementById('ajtcbzf').style.margin = '30px auto';
-//     start = start + 10;
-// });
+// ANNOUNCEMENT APP
 
-function loadnotif() {
+var Announcement_ONSCREEN = [];
+var Announcement_JSON_LIMIT = 3;
+
+function aiLoadMore() {
+    let myButun = $('#aiLoadMoreBut')[0];
+    myButun.innerHTML = `<img src="icons/loader.gif">`;
+    Announcement_JSON_LIMIT += 5;
+}
+
+function announcementViewCheck() {
+    if (user.session && navigator.onLine) {
+        $.ajax({
+            url: 'http://localhost/PROJECTFILEPHP/php/home/annUpdate.php',
+            method: 'POST',
+            data: {
+                idUsr : user.id,
+                onScreenAnn : Announcement_ONSCREEN
+            },
+            success: function(data,err) {
+                console.log(data);
+            }
+        });        
+    }
+}
+
+function loadAnnouncement() {
     let config = {};
     if (user.accType == 'student') {
         config = {
-            st : start,
+            st : Announcement_JSON_LIMIT,
             accType : user.accType,
             schoolId : user.sObj.schoolId,
             year : user.sObj.sclevel,
@@ -388,7 +405,7 @@ function loadnotif() {
     }
     if (user.accType == 'laureate') {
         config = {
-            st : start,
+            st : Announcement_JSON_LIMIT,
             accType : user.accType,
             schoolId : user.sObj.schoolId,
             branchId : user.sObj.branchId,
@@ -402,7 +419,11 @@ function loadnotif() {
             data: config,
             dataType: 'json',
             success: function(data,err) {
-                $('#announcmentWrapper').html(data.htmlData);
+                Announcement_ONSCREEN = data.onScreenNotif;
+                var myWrap = document.getElementById('announcmentWrapper');
+                var inHtml = JSON.stringify($('#announcmentWrapper').html()).replaceAll('\\r',"").replaceAll(/[^a-zA-Z ]/g, "");
+                var outHtml = JSON.stringify(data.htmlData).replaceAll('\\r',"").replaceAll(/[^a-zA-Z ]/g, "");;
+                if (inHtml != outHtml) myWrap.innerHTML = data.htmlData;
             }
         });        
     }
@@ -414,22 +435,6 @@ function loadnotif() {
 
 
 // FILLING
-
-function setWishPerTime() {
-    if (user.session) {
-        var day = new Date();
-        var hr = day.getHours();
-        if (hr >= 0 && hr < 12) {
-            document.getElementById("shname").innerHTML = `Good Morning ${user.firstname} !`;
-        } else if (hr == 12) {
-            document.getElementById("shname").innerHTML = `Good Noon ${user.firstname} !`;
-        } else if (hr >= 12 && hr <= 17) {
-            document.getElementById("shname").innerHTML = `Good Afternoon ${user.firstname} !`;
-        } else {
-            document.getElementById("shname").innerHTML = `Good Evening ${user.firstname} !`;
-        }
-    }
-}
 
 function prf3mer() {
     if (user.session && user.accType == "student") {
@@ -454,31 +459,27 @@ function prf3mer() {
 
 // MODULE VOLET
 
-function mdularaya(selectBox) {
-    if (user.session) {
+function mdularaya() {
+    if (user.session && user.accType == 'student') {
         var formdata = new FormData();
-        formdata.append("sm1", user.sclevel);
-        formdata.append("branche", user.sObj.branche);
-        if (selectBox) {
-            alertada();
-            formdata.append("selectBox", selectBox);
-        }
+        formdata.append("schoolId", user.sObj.schoolId);
+        formdata.append("branchId", user.sObj.branchId);
+        formdata.append("year", user.sObj.sclevel);
         var ajax = new XMLHttpRequest();
         ajax.addEventListener("load", function(event) {
             document.getElementById('crskhdmi').innerHTML = event.target.response;
-            if (selectBox) $('.bcblak').click();
         }, false);
-        ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/modulesreader.php");
+        ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/modulesAndElements/getModules.php");
         ajax.send(formdata);
     }
 }
 
 // ELEMENT CHOISE VOLET
 
-function getcourse(evt) {
+function getcourse(idMod) {
     alertada();
     var formdata = new FormData();
-    formdata.append("ys", evt);
+    formdata.append("id", idMod);
     var ajax = new XMLHttpRequest();
     ajax.addEventListener("load", function(event) {
         document.getElementById('hanadl').innerHTML = event.target.response;
@@ -486,7 +487,7 @@ function getcourse(evt) {
             document.getElementById('hanadl').className = 'dialogwin_';
         }, 300);
     }, false);
-    ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/elemtreader.php");
+    ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/modulesAndElements/getElements.php");
     ajax.send(formdata);
 }
 
@@ -494,30 +495,47 @@ function getcourse(evt) {
 // COURSES PDFS VOLET
 
 
-function getelyout(evtt) {
+function getelyout(idElem) {
+    alertada();
     document.getElementById('hanadl').className = 'dialogwin';
+    document.getElementById('hanadl').innerHTML = "";
     var data_post = new FormData();
     var ajax = new XMLHttpRequest();
-    data_post.append("id", evtt);
+    data_post.append("id", idElem);
     ajax.addEventListener("load", function(event) {
         document.getElementById('lyoutkhdmi').innerHTML = event.target.response;
         $('.bcblak').click();
         document.getElementById('lyoutkhdmi').className = 'elyout';
     }, false);
-    ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/lyoutreader.php");
+    ajax.open("POST", "http://localhost/PROJECTFILEPHP/php/modulesAndElements/getDrs.php");
     ajax.send(data_post);
 }
 
+// NAVIGATION BTWN COURSES
 
-
+function subWraplyutAction(index) {
+    var i = 0;
+    while (1) {
+        if (i == 10) break;
+        try {
+            document.getElementById(`subWraplyutAction_${i}`).className = '';
+            document.getElementById(`subWraplyutElement_${i}`).className = 'subWraplyut hidden';
+            i++;
+        } catch (error) {
+            i++;
+        }
+    }
+    document.getElementById(`subWraplyutElement_${index}`).className = 'subWraplyut viewerON';
+    document.getElementById(`subWraplyutAction_${index}`).className = 'liActive';
+}
   
-function showviewer(source, strEL, strFL, strTYPE) {
+function showviewer(source, drsName, idDrs) {
     const childWin = new BrowserWindow({ 
         width: 1000,
         height: 600,
         minHeight: 400,
         minWidth : 400,
-        title: `${strEL} - ${strFL} - ${strTYPE}`,
+        title: drsName,
         backgroundColor: '#eee',
         icon: __dirname+'/assets/app-icon/win/app.png',
         alwaysOnTop: false,
@@ -536,14 +554,18 @@ function showviewer(source, strEL, strFL, strTYPE) {
           slashes: true
         })
     );
+
     childWin.once("show", () => {
+        childWin.webContents.send("idUsr",user.id);
         childWin.webContents.send("pdfSrc",source);
-        childWin.webContents.send("title",`${strEL} - ${strTYPE}`);
+        childWin.webContents.send("title",drsName);
+        childWin.webContents.send("idDrs",idDrs);
+        childWin.webContents.send("drsName",drsName);
+        childWin.webContents.send("opening",Date.now());
     });
     childWin.once("ready-to-show", () => {
         childWin.show();
-    })
-    
+    });
 }
 
 function lyutfermer() {
@@ -558,9 +580,23 @@ function openTool(stbr) {
     shell.openExternal(linktl);
 }
 
-function openLink(link) {
+function openLink(link,from) {
     const {shell} = require('electron');
     shell.openExternal(link);
+    if (user.session && from) {
+        $.ajax({
+            url: 'http://localhost/PROJECTFILEPHP/php/adsServices/openLinkAcitivity.php',
+            method: 'POST',
+            data: {
+                idUsr : user.id,
+                link: link,
+                from : from
+            },
+            success: function(data,err) {
+                console.log(data);
+            }
+        });        
+    }
 }
 
 
