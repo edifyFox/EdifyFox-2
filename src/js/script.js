@@ -440,15 +440,15 @@ function prf3mer() {
     if (user.session && user.accType == "student") {
         document.getElementById("prfcrdstt").innerHTML = user.sObj.getLevel();
         document.getElementById("prfcrdgnd").innerHTML = user.sObj.branche;
-        document.getElementById("prfcrdage").innerHTML = user.getAge();
+        document.getElementById("prfcrdschool").innerHTML = user.sObj.school;
         document.getElementById("prfcrdddn").innerHTML = user.getBirthday();
         document.getElementById("prfcrdsec").innerHTML = "sec-" + user.sObj.sec;
         document.getElementById("prfcrdgrp").innerHTML = "G-" + user.sObj.grp;
         document.getElementById("prfcrdsgp").innerHTML = "SG-" + user.sObj.sgrp;
         document.getElementById("prfcrdddc").innerHTML = user.getSubsDay();
-        document.getElementById("prfcrdnam").innerHTML = user.getName();
-        document.getElementById("prfcrdema").innerHTML = user.email;
-        document.getElementById("prfcrdpwd").innerHTML = user.pwd;
+        // document.getElementById("prfcrdnam").innerHTML = user.getName();
+        // document.getElementById("prfcrdema").innerHTML = user.email;
+        // document.getElementById("prfcrdpwd").innerHTML = user.pwd;
         document.getElementById("prfcrdimg").src = user.getPdp();
     }
 }
